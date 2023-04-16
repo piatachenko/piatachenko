@@ -3,7 +3,7 @@ import React from "react";
 export default function Logo() {
   return (
     <>
-      <div className="group max-w-[15rem] overflow-hidden text-2xl/[90%] text-white">
+      <div className="group max-w-[15rem] overflow-hidden text-2xl/[90%]">
         <div className="mr-2 inline-block">
           <span>I</span>
           <span className="inline-block translate-y-full transition-all duration-[.45s] group-hover:translate-y-0 group-hover:delay-[.2s] group-[(:hover)]:delay-[.1s]">
@@ -16,7 +16,7 @@ export default function Logo() {
             N
           </span>
         </div>
-        <div className="inline-block -translate-x-[3.6rem] transition-all group-hover:translate-x-0 group-hover:delay-[0s] group-hover:duration-[.7s] group-[(:hover)]:delay-[.5s] group-[(:hover)]:duration-[1s]">
+        <div className="inline-block -translate-x-[3.6rem] transition-all group-hover:translate-x-0 group-hover:delay-[0s] group-hover:duration-[.7s] group-[(:hover)]:delay-[.1s] group-[(:hover)]:duration-[1s]">
           <span>P</span>
           <span className="inline-block translate-y-full transition-all duration-[.35s] group-hover:translate-y-0 group-hover:delay-[.2s] group-[(:hover)]:delay-[.45s]">
             I
