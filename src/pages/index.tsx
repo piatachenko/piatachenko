@@ -1,8 +1,29 @@
 import Head from "next/head";
 import Image from "next/image";
-import { type CSSProperties } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 
 export default function Home() {
+  const scrollContainer = useRef<HTMLDivElement | null>(null);
+  
+  const handleWheel = (e: WheelEvent) => {
+    if (scrollContainer.current !== null) {
+      if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+        scrollContainer.current.scrollLeft += e.deltaY * 0.5;
+        e.preventDefault();
+      } else {
+        scrollContainer.current.scrollLeft += e.deltaX * 0.5;
+      }
+    }
+  };
+
+    useEffect(() => {
+    window.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -11,6 +32,7 @@ export default function Home() {
       </Head>
       <main className="relative min-h-screen">
         <div
+          ref={scrollContainer}
           className="absolute bottom-1/2 flex w-full [&::-webkit-scrollbar]:hidden translate-y-1/2 gap-10 overflow-x-auto px-[--px]"
           style={{ "--px": "calc(50vw - 12.5rem)" } as CSSProperties}
         >
