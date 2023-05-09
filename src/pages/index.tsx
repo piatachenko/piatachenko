@@ -1,9 +1,20 @@
 import { motion, useMotionValue } from "framer-motion";
 import Head from "next/head";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
+
+const imageArray = [
+  "/assets/2461288.jpg",
+  "/assets/2461292.jpg",
+  "/assets/2461294.jpg",
+  "/assets/2461302.jpg",
+  "/assets/2461309.jpg",
+  "/assets/2461313.jpg",
+  "/assets/8302965.jpg",
+];
 
 export default function Home() {
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [windowWidth, setWindowWidth] = useState(0);
 
   useEffect(() => {
@@ -18,44 +29,6 @@ export default function Home() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const imageArray = [
-    "/assets/2461288.jpg",
-    "/assets/2461292.jpg",
-    "/assets/2461294.jpg",
-    "/assets/2461302.jpg",
-    "/assets/2461309.jpg",
-    "/assets/2461313.jpg",
-    "/assets/8302965.jpg",
-  ];
-
-  const width = 300;
-  const gap = 40;
-  const scrollX = useMotionValue(0);
-  const paddingValue = `0 calc(50vw - ${width / 2}px)`;
-
-  const [, paddingBlock, paddingInline] = paddingValue.match(
-    /^([\d\s.-]+)\s+([\w\s().+-]+)$/
-  );
-
-  function calcToPx(expression:any) {
-    const regex = /calc\(([\d.]+)vw\s*-\s*([\d.]+)px\)/;
-    const [, vwValue, pixelValue] = expression.match(regex);
-
-    const pixels =
-      parseFloat(vwValue) * (windowWidth / 100) - parseFloat(pixelValue);
-    return pixels;
-  }
-
-
-  function getWidth(items: any) {
-    const totalWidth = items.length * width;
-    const totalGap = (items.length - 1) * gap;
-    const totalScroll = totalWidth + totalGap + calcToPx(paddingInline) * 2;
-    return totalScroll;
-  }
-
-  const containerRef = useRef<HTMLDivElement | null>(null);
 
   const handleWheel = (e: WheelEvent) => {
     if (containerRef.current !== null) {
@@ -76,6 +49,22 @@ export default function Home() {
     };
   }, []);
 
+  const scrollX = useMotionValue(0);
+  const [width, gap] = [300, 40];
+  const [paddingInlineVwValue, paddingInlinePxValue] = [50, width / 2];
+  const paddingInline = `calc(${paddingInlineVwValue}vw - ${paddingInlinePxValue}px)`;
+
+  function calcPaddingInlineToPx() {
+    return (paddingInlineVwValue * windowWidth) / 100 - paddingInlinePxValue;
+  }
+
+  function getWidth(items: string[]) {
+    const totalWidth = items.length * width;
+    const totalGap = (items.length - 1) * gap;
+    const totalScroll = totalWidth + totalGap + calcPaddingInlineToPx() * 2;
+    return totalScroll;
+  }
+
   return (
     <>
       <Head>
@@ -93,12 +82,14 @@ export default function Home() {
               left: -getWidth(imageArray) + windowWidth,
               right: 0,
             }}
-            style={{
-              width: getWidth(imageArray),
-              x: scrollX,
-              gap: gap,
-              padding: paddingValue,
-            }}
+            style={
+              {
+                width: getWidth(imageArray),
+                x: scrollX,
+                gap: gap,
+                "padding-inline": paddingInline,
+              } as CSSProperties
+            }
             className="flex min-h-screen items-center"
           >
             {imageArray.map((element, index) => (
@@ -107,7 +98,7 @@ export default function Home() {
                 src={element}
                 alt=""
                 draggable="false"
-                className="w-[4 0rem] h-[20rem] select-none object-cover"
+                className="h-[20rem] select-none object-cover"
                 style={{ width: width }}
                 width={1920}
                 height={600}
