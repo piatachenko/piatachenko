@@ -2,6 +2,8 @@ import { animate, motion, useMotionValue } from "framer-motion";
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import Navbar from "~/components/Navbar";
+import MainLayout from "~/layouts/MainLayout";
 
 const imageArray = [
   "/assets/2461288.jpg",
@@ -116,27 +118,29 @@ export default function Home() {
         <title>IP: Work</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="relative min-h-screen">
-        <motion.ul
-          ref={ref}
-          onMouseMove={handleMouseMove}
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseLeave}
-          onScroll={handleScroll}
-          className="absolute bottom-1/2 flex w-full translate-y-1/2 gap-10 overflow-x-auto px-[--px] [&::-webkit-scrollbar]:hidden"
-          style={{ "--px": "calc(50vw - 10rem)" } as CSSProperties}
-        >
-          {imageArray.map((element, index) => (
-            <motion.li
-              key={index}
-              className="bg-[image:--bg-image] h-[30rem] w-[20rem] select-none shrink-0 bg-cover bg-center"
-              style={{ "--bg-image": `url('${element}')` } as CSSProperties}
-            />
-          ))}
-        </motion.ul>
-        <div className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 before:absolute before:bottom-1/2 before:right-1/2 before:block before:h-[.11rem] before:w-7 before:translate-x-1/2 before:translate-y-1/2 before:rotate-90 before:bg-white before:content-[''] after:absolute after:bottom-1/2 after:right-1/2 after:block after:h-[.11rem] after:w-7 after:translate-x-1/2 after:translate-y-1/2 after:bg-white after:content-['']" />
-      </main>
+      <MainLayout page="Work">
+        <main className="relative min-h-screen">
+          <motion.ul
+            ref={ref}
+            onMouseMove={handleMouseMove}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
+            onScroll={handleScroll}
+            className="absolute bottom-1/2 flex w-full translate-y-1/2 gap-10 overflow-x-auto px-[--px] [&::-webkit-scrollbar]:hidden"
+            style={{ "--px": "calc(50vw - 10rem)" } as CSSProperties}
+          >
+            {imageArray.map((element, index) => (
+              <motion.li
+                key={index}
+                className="h-[30rem] w-[20rem] shrink-0 select-none bg-[image:--bg-image] bg-cover bg-center"
+                style={{ "--bg-image": `url('${element}')` } as CSSProperties}
+              />
+            ))}
+          </motion.ul>
+          <div className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 before:absolute before:bottom-1/2 before:right-1/2 before:block before:h-[.11rem] before:w-7 before:translate-x-1/2 before:translate-y-1/2 before:rotate-90 before:bg-white before:content-[''] after:absolute after:bottom-1/2 after:right-1/2 after:block after:h-[.11rem] after:w-7 after:translate-x-1/2 after:translate-y-1/2 after:bg-white after:content-['']" />
+        </main>
+      </MainLayout>
     </>
   );
 }
