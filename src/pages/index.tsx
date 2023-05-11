@@ -1,18 +1,44 @@
 import { animate, motion, useMotionValue } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+
+const imageArray = [
+  "/assets/2461288.jpg",
+  "/assets/2461292.jpg",
+  "/assets/2461294.jpg",
+  "/assets/2461302.jpg",
+  "/assets/2461309.jpg",
+  "/assets/2461313.jpg",
+  "/assets/8302965.jpg",
+];
 
 export default function Home() {
+  const handleWheel = (e: WheelEvent) => {
+    if (ref.current !== null) {
+      if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+        ref.current.scrollLeft += e.deltaY * 0.3; // Change the multiplier value
+        e.preventDefault();
+      } else {
+        ref.current.scrollLeft += e.deltaX * 0.3; // Change the multiplier value
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
+
   const ref = useRef<HTMLUListElement>(null);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [trackMouse, setTrackMouse] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(true);
-  const [items, setItems] = useState<number[]>([]);
-
-  useEffect(() => {
-    const arr = new Array(10).fill(undefined).map((val, idx) => idx);
-    setItems(arr);
-  }, []);
+  const [lastDragVelocity, setLastDragVelocity] = useState(0);
 
   const x = useMotionValue(0);
 
@@ -20,27 +46,14 @@ export default function Home() {
     if (!ref.current) return;
     if (!trackMouse) return;
 
-    setAnimationComplete(false);
-
     const xVal = e.pageX - ref.current.offsetLeft;
-    const walk = (xVal - startX) * 2; //scroll-fast
+    const walk = (xVal - startX) * 1; //scroll-fast
+    const newScrollLeft = scrollLeft - walk;
 
-    const controls = animate(x, scrollLeft - walk, {
-      type: "tween",
-      ease: "easeOut",
-      duration: 0.5,
-      onUpdate: (val) => {
-        if (!ref.current) return;
-        ref.current.scrollLeft = val;
-      },
-      onComplete: () => {
-        setAnimationComplete(true);
-      },
-      onStop: () => {
-        setAnimationComplete(true);
-      },
-    });
-    return controls.stop;
+    const velocity = newScrollLeft - ref.current.scrollLeft;
+    setLastDragVelocity(velocity);
+
+    ref.current.scrollLeft = newScrollLeft;
   };
 
   const handleMouseDown = (e: React.PointerEvent<HTMLUListElement>) => {
@@ -59,8 +72,34 @@ export default function Home() {
     setTrackMouse(false);
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (e: React.PointerEvent<HTMLUListElement>) => {
     setTrackMouse(false);
+
+    if (!ref.current) return;
+
+    const endX = e.pageX - ref.current.offsetLeft;
+
+    // Check if the mouse has actually moved
+    if (Math.abs(startX - endX) > 2) {
+      const targetScrollLeft = ref.current.scrollLeft + lastDragVelocity * 10; // Adjust the multiplier for desired momentum
+
+      animate(ref.current.scrollLeft, targetScrollLeft, {
+        type: "spring",
+        stiffness: 112.5,
+        damping: 20,
+        velocity: lastDragVelocity,
+        onUpdate: (val) => {
+          if (!ref.current) return;
+          ref.current.scrollLeft = val;
+        },
+        onComplete: () => {
+          setAnimationComplete(true);
+        },
+        onStop: () => {
+          setAnimationComplete(true);
+        },
+      });
+    }
   };
 
   const handleScroll = () => {
@@ -73,18 +112,31 @@ export default function Home() {
 
   return (
     <>
-      <motion.ul
-        ref={ref}
-        onMouseMove={handleMouseMove}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
-        onScroll={handleScroll}
-      >
-        {items.map((idx) => (
-          <motion.li key={idx}></motion.li>
-        ))}
-      </motion.ul>
+      <Head>
+        <title>IP: Work</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className="relative min-h-screen">
+        <motion.ul
+          ref={ref}
+          onMouseMove={handleMouseMove}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+          onScroll={handleScroll}
+          className="absolute bottom-1/2 flex w-full translate-y-1/2 gap-10 overflow-x-auto px-[--px] [&::-webkit-scrollbar]:hidden"
+          style={{ "--px": "calc(50vw - 10rem)" } as CSSProperties}
+        >
+          {imageArray.map((element, index) => (
+            <motion.li
+              key={index}
+              className="bg-[image:--bg-image] h-[30rem] w-[20rem] select-none shrink-0 bg-cover bg-center"
+              style={{ "--bg-image": `url('${element}')` } as CSSProperties}
+            />
+          ))}
+        </motion.ul>
+        <div className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 before:absolute before:bottom-1/2 before:right-1/2 before:block before:h-[.11rem] before:w-7 before:translate-x-1/2 before:translate-y-1/2 before:rotate-90 before:bg-white before:content-[''] after:absolute after:bottom-1/2 after:right-1/2 after:block after:h-[.11rem] after:w-7 after:translate-x-1/2 after:translate-y-1/2 after:bg-white after:content-['']" />
+      </main>
     </>
   );
 }
