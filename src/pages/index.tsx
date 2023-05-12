@@ -1,8 +1,6 @@
 import { animate, motion, useMotionValue } from "framer-motion";
 import Head from "next/head";
-import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import Navbar from "~/components/Navbar";
 import MainLayout from "~/layouts/MainLayout";
 
 const imageArray = [
@@ -76,16 +74,16 @@ export default function Home() {
 
   const handleMouseUp = (e: React.PointerEvent<HTMLUListElement>) => {
     setTrackMouse(false);
-
+  
     if (!ref.current) return;
-
+  
     const endX = e.pageX - ref.current.offsetLeft;
-
+  
     // Check if the mouse has actually moved
     if (Math.abs(startX - endX) > 2) {
       const targetScrollLeft = ref.current.scrollLeft + lastDragVelocity * 10; // Adjust the multiplier for desired momentum
-
-      animate(ref.current.scrollLeft, targetScrollLeft, {
+  
+      void animate(ref.current.scrollLeft, targetScrollLeft, {
         type: "spring",
         stiffness: 112.5,
         damping: 20,

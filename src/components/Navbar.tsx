@@ -13,7 +13,7 @@ export default function Navbar({ page }: NavbarProps) {
         <div className="flex gap-10">
           {pages.map((element, id) => (
             <Link
-              key={element + id}
+              key={element + id.toString()}
               className={
                 page === element
                   ? "pointer-events-none"
