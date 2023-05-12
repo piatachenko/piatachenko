@@ -19,7 +19,7 @@ export default function Navbar({ page }: NavbarProps) {
                   ? "pointer-events-none"
                   : "ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] opacity-30 transition-opacity duration-300 hover:opacity-100"
               }
-              href={`/${element.toLowerCase()}`}
+              href={element === 'Work' ? '/' : `/${element.toLowerCase()}`}
             >
               {element}
             </Link>
