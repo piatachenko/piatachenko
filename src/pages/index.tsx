@@ -39,6 +39,17 @@ export default function Home() {
   const [trackMouse, setTrackMouse] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(true);
   const [lastDragVelocity, setLastDragVelocity] = useState(0);
+  const [bgXPositions, setBgXPositions] = useState(() => {
+    return imageArray.map((_, index) => {
+      const parallaxSpeed = 0.02;
+      const elementWidth = 360; // Element width in pixels (20rem converted to pixels)
+      const elementScrollPercentage = (-index * elementWidth) / elementWidth;
+      const parallaxOffset = elementScrollPercentage * parallaxSpeed * 100;
+  
+      return 50 + parallaxOffset;
+    });
+  });
+  
 
   const x = useMotionValue(0);
 
@@ -108,6 +119,19 @@ export default function Home() {
     if (animationComplete) {
       x.set(ref.current.scrollLeft);
     }
+
+    const scrollAmount = ref.current.scrollLeft;
+    const parallaxSpeed = 0.02;
+  
+    const newBgXPositions = bgXPositions.map((_, index) => {
+      const elementWidth = 360;
+      const elementScrollPercentage = (scrollAmount - index * elementWidth) / elementWidth;
+      const parallaxOffset = elementScrollPercentage * parallaxSpeed * 100;
+  
+      return 50 + parallaxOffset;
+    });
+  
+    setBgXPositions(newBgXPositions);
   };
 
   return (
@@ -131,8 +155,8 @@ export default function Home() {
             {imageArray.map((element, index) => (
               <motion.li
                 key={index}
-                className="h-[30rem] w-[20rem] shrink-0 select-none bg-[image:--bg-image] bg-cover bg-center"
-                style={{ "--bg-image": `url('${element}')` } as CSSProperties}
+                className="h-[30rem] w-[20rem] shrink-0 select-none bg-[image:--bg-image] bg-cover bg-[var(--bg-x-position)_center]"
+                style={{ "--bg-image": `url('${element}')`, "--bg-x-position": `${bgXPositions[index]}%` } as CSSProperties}
               />
             ))}
           </motion.ul>
