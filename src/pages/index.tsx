@@ -42,14 +42,13 @@ export default function Home() {
   const [bgXPositions, setBgXPositions] = useState(() => {
     return imageArray.map((_, index) => {
       const parallaxSpeed = 0.02;
-      const elementWidth = 360; // Element width in pixels (20rem converted to pixels)
+      const elementWidth = 360;
       const elementScrollPercentage = (-index * elementWidth) / elementWidth;
       const parallaxOffset = elementScrollPercentage * parallaxSpeed * 100;
-  
+
       return 50 + parallaxOffset;
     });
   });
-  
 
   const x = useMotionValue(0);
 
@@ -85,19 +84,19 @@ export default function Home() {
 
   const handleMouseUp = (e: React.PointerEvent<HTMLUListElement>) => {
     setTrackMouse(false);
-  
+
     if (!ref.current) return;
-  
+
     const endX = e.pageX - ref.current.offsetLeft;
-  
+
     // Check if the mouse has actually moved
     if (Math.abs(startX - endX) > 2) {
       const targetScrollLeft = ref.current.scrollLeft + lastDragVelocity * 10; // Adjust the multiplier for desired momentum
-  
+
       void animate(ref.current.scrollLeft, targetScrollLeft, {
         type: "spring",
-        stiffness: 112.5,
-        damping: 20,
+        stiffness: 250,
+        damping: 30,
         velocity: lastDragVelocity,
         onUpdate: (val) => {
           if (!ref.current) return;
@@ -122,15 +121,16 @@ export default function Home() {
 
     const scrollAmount = ref.current.scrollLeft;
     const parallaxSpeed = 0.02;
-  
+
     const newBgXPositions = bgXPositions.map((_, index) => {
       const elementWidth = 360;
-      const elementScrollPercentage = (scrollAmount - index * elementWidth) / elementWidth;
+      const elementScrollPercentage =
+        (scrollAmount - index * elementWidth) / elementWidth;
       const parallaxOffset = elementScrollPercentage * parallaxSpeed * 100;
-  
+
       return 50 + parallaxOffset;
     });
-  
+
     setBgXPositions(newBgXPositions);
   };
 
@@ -156,7 +156,12 @@ export default function Home() {
               <motion.li
                 key={index}
                 className="h-[30rem] w-[20rem] shrink-0 select-none bg-[image:--bg-image] bg-cover bg-[var(--bg-x-position)_center]"
-                style={{ "--bg-image": `url('${element}')`, "--bg-x-position": `${bgXPositions[index]}%` } as CSSProperties}
+                style={
+                  {
+                    "--bg-image": `url('${element}')`,
+                    "--bg-x-position": `${bgXPositions[index] ?? 50}%`,
+                  } as CSSProperties
+                }
               />
             ))}
           </motion.ul>
