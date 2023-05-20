@@ -50,7 +50,7 @@ export default function Iframe() {
   //     document.documentElement.removeEventListener("mouseover", onScroll);
   // }, [windowWidth]);
 
-  const scale = 2;
+  const scale = 1.5;
 
   useEffect(() => {
     function onWheel(e: WheelEvent) {
