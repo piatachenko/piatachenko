@@ -74,12 +74,16 @@ export default function Iframe() {
           <ScrollerMotion scale={scale}>
             <motion.ul
               className="flex min-h-screen items-center pl-[--px]"
-              style={{ "--px": "calc(50vw - 10rem)" } as CSSProperties}
+              style={
+                {
+                  "--px": "calc(50vw - var(--w) / 2)",
+                } as CSSProperties
+              }
             >
               {imageArray.map((element, index) => (
                 <motion.li
                   key={index}
-                  className="h-[30rem] w-[20rem] shrink-0 select-none bg-[image:--bg-image] bg-cover bg-[var(--bg-x-position)_center] [&:not(:first-of-type)]:ml-10"
+                  className="h-[--h] w-[--w] shrink-0 select-none bg-[image:--bg-image] bg-cover bg-[var(--bg-x-position)_center] [&:not(:first-of-type)]:ml-10"
                   style={
                     {
                       "--bg-image": `url('${element}')`,

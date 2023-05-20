@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --w: 20rem;
+  --h: 30rem;
+}
+
 html,
 body {
   @apply overscroll-none;
