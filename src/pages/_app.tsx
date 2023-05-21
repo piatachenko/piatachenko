@@ -11,7 +11,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       <iframe
         src="/iframe"
         className={
-          router.pathname === "/" ? "absolute h-full w-full -z-10" : "hidden"
+          router.pathname === "/" ? "absolute h-full w-full" : "hidden"
         }
       />
       <Component {...pageProps} />
