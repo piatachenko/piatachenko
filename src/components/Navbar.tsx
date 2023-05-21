@@ -11,10 +11,8 @@ export default function Navbar({ page }: NavbarProps) {
   return (
     <>
       <nav
-        className="fixed right-1/2 top-[--top] z-10 translate-x-1/2"
-        style={
-          { "--top": `calc((100vh - var(--h)) / 5)` } as CSSProperties
-        }
+        className="absolute right-1/2 top-[--top] z-10 translate-x-1/2"
+        style={{ "--top": `calc((100vh - var(--h)) / 5)` } as CSSProperties}
       >
         <div className="flex gap-10">
           {pages.map((element, id) => (

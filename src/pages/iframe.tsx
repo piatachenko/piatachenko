@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
-import Head from "next/head";
 import { useEffect, type CSSProperties } from "react";
 import { ScrollerMotion } from "scroller-motion";
-import MainLayout from "~/layouts/MainLayout";
 
 const imageArray = [
   "/assets/2461288.jpg",
@@ -65,38 +63,31 @@ export default function Iframe() {
 
   return (
     <>
-      <Head>
-        <title>IP: Work</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <MainLayout page="Work">
-        <main>
-          <ScrollerMotion scale={scale}>
-            <motion.ul
-              className="flex min-h-screen items-center pl-[--px]"
-              style={
-                {
-                  "--px": "calc(50vw - var(--w) / 2)",
-                } as CSSProperties
-              }
-            >
-              {imageArray.map((element, index) => (
-                <motion.li
-                  key={index}
-                  className="h-[--h] w-[--w] shrink-0 select-none bg-[image:--bg-image] bg-cover bg-[var(--bg-x-position)_center] [&:not(:first-of-type)]:ml-10"
-                  style={
-                    {
-                      "--bg-image": `url('${element}')`,
-                    } as CSSProperties
-                  }
-                />
-              ))}
-              <div className="h-1 w-[--px] shrink-0 bg-transparent" />
-            </motion.ul>
-          </ScrollerMotion>
-          <div className="fixed bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 before:absolute before:bottom-1/2 before:right-1/2 before:block before:h-[.11rem] before:w-7 before:translate-x-1/2 before:translate-y-1/2 before:rotate-90 before:bg-white before:content-[''] after:absolute after:bottom-1/2 after:right-1/2 after:block after:h-[.11rem] after:w-7 after:translate-x-1/2 after:translate-y-1/2 after:bg-white after:content-['']" />
-        </main>
-      </MainLayout>
+      <main>
+        <ScrollerMotion scale={scale}>
+          <motion.ul
+            className="flex min-h-screen items-center pl-[--px]"
+            style={
+              {
+                "--px": "calc(50vw - var(--w) / 2)",
+              } as CSSProperties
+            }
+          >
+            {imageArray.map((element, index) => (
+              <motion.li
+                key={index}
+                className="h-[--h] w-[--w] shrink-0 select-none bg-[image:--bg-image] bg-cover bg-[var(--bg-x-position)_center] [&:not(:first-of-type)]:ml-10"
+                style={
+                  {
+                    "--bg-image": `url('${element}')`,
+                  } as CSSProperties
+                }
+              />
+            ))}
+            <div className="h-1 w-[--px] shrink-0 bg-transparent" />
+          </motion.ul>
+        </ScrollerMotion>
+      </main>
     </>
   );
 }
