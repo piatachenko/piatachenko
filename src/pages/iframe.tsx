@@ -3,12 +3,11 @@ import { useEffect, type CSSProperties } from "react";
 import { ScrollerMotion } from "scroller-motion";
 
 const imageArray = [
-  "/assets/2461288.jpg",
-  "/assets/2461292.jpg",
-  "/assets/2461294.jpg",
-  "/assets/2461302.jpg",
-  "/assets/2461309.jpg",
-  "/assets/2461313.jpg",
+  "/assets/instrument.png",
+  "/assets/lobe-ai.png",
+  "/assets/oh-studio.png",
+  "/assets/backstage-talks.png",
+  "/assets/ableton.png",
 ];
 
 export default function Iframe() {
