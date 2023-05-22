@@ -9,7 +9,6 @@ const imageArray = [
   "/assets/2461302.jpg",
   "/assets/2461309.jpg",
   "/assets/2461313.jpg",
-  "/assets/8302965.jpg",
 ];
 
 export default function Iframe() {
@@ -48,7 +47,7 @@ export default function Iframe() {
   //     document.documentElement.removeEventListener("mouseover", onScroll);
   // }, [windowWidth]);
 
-  const scale = 1.5;
+  const scale = 1.25;
 
   useEffect(() => {
     function onWheel(e: WheelEvent) {
