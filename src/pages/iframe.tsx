@@ -104,15 +104,14 @@ export default function Iframe() {
             className="flex min-h-screen items-center pl-[--px]"
             style={
               {
-                "--mx": "1.25rem",
-                "--px": "calc(50vw - var(--w) / 2 - var(--mx))",
+                "--px": "calc(50vw - var(--w) / 2)",
               } as CSSProperties
             }
           >
             {imageArray.map((element, index) => (
               <motion.li
                 key={index}
-                className="mx-[--mx] h-[--h] w-[--w] shrink-0 select-none bg-[image:--bg-image] bg-cover"
+                className="h-[--h] w-[--w] shrink-0 select-none bg-[image:--bg-image] bg-cover [&:not(:first-child)]:ml-10"
                 style={
                   {
                     "--bg-image": `url('${element}')`,
