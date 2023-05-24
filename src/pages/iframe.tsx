@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { useEffect, type CSSProperties } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { ScrollerMotion } from "scroller-motion";
 
-const imageArray = [
+export const imageArray = [
   "/assets/instrument.png",
   "/assets/lobe-ai.png",
   "/assets/oh-studio.png",
@@ -11,23 +11,7 @@ const imageArray = [
 ];
 
 export default function Iframe() {
-  // const [windowWidth, setWindowWidth] = useState(0);
-
-  // useEffect(() => {
-  //   function updateWindowWidth() {
-  //     setWindowWidth(window.innerWidth);
-  //   }
-
-  //   updateWindowWidth();
-  //   window.addEventListener("resize", updateWindowWidth);
-
-  //   return () => {
-  //     window.removeEventListener("resize", updateWindowWidth);
-  //   };
-  // }, []);
-
   // const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
-
   // useEffect(() => {
   //   function onScroll() {
   //     const scrollWidth = document.documentElement.scrollWidth;
@@ -46,7 +30,36 @@ export default function Iframe() {
   //     document.documentElement.removeEventListener("mouseover", onScroll);
   // }, [windowWidth]);
 
-  const scale = 1.25;
+  const [currentItem, setCurrentItem] = useState(1);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    function updateWindowWidth() {
+      setWindowWidth(window.innerWidth);
+    }
+    updateWindowWidth();
+    window.addEventListener("resize", updateWindowWidth);
+    return () => {
+      window.removeEventListener("resize", updateWindowWidth);
+    };
+  }, []);
+
+  useEffect(() => {
+    function onScroll() {
+      setScrollLeft(document.documentElement.scrollLeft);
+    }
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const imageWidth =
+      (document.documentElement.scrollWidth - windowWidth) /
+      (imageArray.length - 1);
+    const newCurrentItem = Math.floor(scrollLeft / imageWidth + 1.5);
+    setCurrentItem(newCurrentItem);
+  }, [scrollLeft]);
 
   useEffect(() => {
     function onWheel(e: WheelEvent) {
@@ -62,19 +75,44 @@ export default function Iframe() {
   return (
     <>
       <main>
-        <ScrollerMotion scale={scale}>
+        <div
+          className="fixed bottom-[--bottom] right-1/2 flex translate-x-1/2 items-center justify-center gap-1 mix-blend-difference"
+          style={
+            { "--bottom": `calc((100vh - var(--h)) / 5)` } as CSSProperties
+          }
+        >
+          <div className="h-[1.5em] overflow-hidden">
+            {imageArray.map((_, index) => (
+              <div
+                key={index}
+                className="translate-y-[--translate-y] transition-all duration-[.8s] ease-out"
+                style={
+                  {
+                    "--translate-y": `-${(currentItem - 1) * 100}%`,
+                  } as CSSProperties
+                }
+              >
+                {index + 1}
+              </div>
+            ))}
+          </div>
+          <div>-</div>
+          <div>{imageArray.length}</div>
+        </div>
+        <ScrollerMotion scale={1.25}>
           <motion.ul
             className="flex min-h-screen items-center pl-[--px]"
             style={
               {
-                "--px": "calc(50vw - var(--w) / 2)",
+                "--mx": "1.25rem",
+                "--px": "calc(50vw - var(--w) / 2 - var(--mx))",
               } as CSSProperties
             }
           >
             {imageArray.map((element, index) => (
               <motion.li
                 key={index}
-                className="h-[--h] w-[--w] shrink-0 select-none bg-[image:--bg-image] bg-cover bg-[var(--bg-x-position)_center] [&:not(:first-of-type)]:ml-10"
+                className="mx-[--mx] h-[--h] w-[--w] shrink-0 select-none bg-[image:--bg-image] bg-cover"
                 style={
                   {
                     "--bg-image": `url('${element}')`,
