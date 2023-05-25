@@ -74,7 +74,7 @@ export default function Iframe() {
 
   return (
     <>
-      <main>
+      <main className="iframe">
         <div
           className="fixed bottom-[--bottom] right-1/2 flex translate-x-1/2 items-center justify-center gap-1 mix-blend-difference"
           style={
