@@ -13,6 +13,32 @@ body {
   @apply overscroll-none;
 }
 
-::-webkit-scrollbar {
-  display: none;
+body::-webkit-scrollbar {
+  @apply hidden;
+}
+
+.slide-in::after {
+  @apply animate-[slide-in_var(--duration)_forwards];
+}
+
+.slide-out::after {
+  @apply animate-[slide-out_var(--duration)_forwards];
+}
+
+@keyframes slide-in {
+  0% {
+    @apply left-0 w-0;
+  }
+  100% {
+    @apply left-0 w-full;
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    @apply right-0 w-full;
+  }
+  100% {
+    @apply right-0 w-0;
+  }
 }
