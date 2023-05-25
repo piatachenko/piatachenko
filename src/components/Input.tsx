@@ -1,4 +1,5 @@
 import { useRef, type CSSProperties } from "react";
+import TextareaAutosize from "react-textarea-autosize";
 
 interface InputProps {
   placeholder?: string;
@@ -35,14 +36,14 @@ export default function Input({ placeholder, type, customClass }: InputProps) {
         className="relative mb-10 block pb-2 text-4xl after:absolute after:bottom-0 after:right-0 after:h-0.5 after:w-0 after:bg-white after:content-['']"
       >
         {type === "textarea" ? (
-          <textarea
+          <TextareaAutosize
+            minRows={5}
+            maxRows={9}
             ref={textareaRef}
             placeholder={placeholder}
             onChange={onChange}
-            className={`h-60 w-full resize-none bg-transparent outline-none ${customClass}`}
-            contentEditable
+            className={`w-full pb-10 bg-transparent resize-none outline-none ${customClass}`}
           />
-          
         ) : (
           <input
             ref={inputRef}

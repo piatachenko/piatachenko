@@ -22,6 +22,7 @@
     "next": "^13.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-textarea-autosize": "^8.4.1",
     "scroller-motion": "^1.2.3",
     "superjson": "1.12.2",
     "three": "^0.151.3",
