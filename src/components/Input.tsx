@@ -42,6 +42,7 @@ export default function Input({ placeholder, type, customClass }: InputProps) {
             ref={textareaRef}
             placeholder={placeholder}
             onChange={onChange}
+            style={{ height: 240 }} // (minRows + 1) * line-height
             className={`w-full pb-10 bg-transparent resize-none outline-none ${customClass}`}
           />
         ) : (
