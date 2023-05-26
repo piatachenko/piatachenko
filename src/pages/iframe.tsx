@@ -113,9 +113,10 @@ export default function Iframe() {
             {imageArray.map((element, index) => (
               <motion.li
                 key={index}
-                className="h-[--h] w-[--w] shrink-0 select-none bg-[image:--bg-image] bg-cover [&:not(:first-child)]:ml-10"
+                className="w-[--w] shrink-0 select-none bg-[image:--bg-image] bg-cover [&:not(:first-child)]:ml-10"
                 style={
                   {
+                    height: "min(var(--h), calc(100vh - 1.25rem))",
                     "--bg-image": `url('${element}')`,
                   } as CSSProperties
                 }
