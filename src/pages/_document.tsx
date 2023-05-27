@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className="bg-black/95 [&:has(.iframe)]:bg-transparent text-zinc-100 font-['Arimo']">
+      <body className="bg-black/95 font-['Arimo'] text-zinc-100 [&:has(.iframe)]:bg-transparent [&::-webkit-scrollbar]:[&:has(.iframe)]:hidden">
         <Main />
         <NextScript />
       </body>

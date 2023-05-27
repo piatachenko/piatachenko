@@ -13,10 +13,6 @@ body {
   @apply overscroll-none;
 }
 
-body::-webkit-scrollbar {
-  @apply hidden;
-}
-
 .slide-in::after {
   @apply animate-[slide-in_var(--duration)_forwards];
 }
