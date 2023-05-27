@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { type CSSProperties } from "react";
 
 const pages = ["Work", "Contact"];
 
@@ -11,12 +10,10 @@ export default function Navbar({ page }: NavbarProps) {
   return (
     <>
       <nav
-        className="fixed right-1/2 top-[--top] z-10 -translate-y-1/2 translate-x-1/2 mix-blend-difference"
-        style={
-          {
-            "--top": "max(calc((100vh - var(--h)) / 4), 2rem)",
-          } as CSSProperties
-        }
+        className="fixed right-1/2 z-10 -translate-y-1/2 translate-x-1/2 mix-blend-difference"
+        style={{
+          top: "max(calc((100vh - var(--h)) / 4), 2rem)",
+        }}
       >
         {pages.map((element, id) => (
           <Link

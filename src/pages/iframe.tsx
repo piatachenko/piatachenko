@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useState } from "react";
 import { ScrollerMotion } from "scroller-motion";
 
 export const imageArray = [
@@ -76,23 +76,19 @@ export default function Iframe() {
     <>
       <main className="iframe">
         <div
-          className="fixed bottom-[--bottom] right-1/2 z-10 flex translate-x-1/2 translate-y-1/2 items-center justify-center gap-1 mix-blend-difference"
-          style={
-            {
-              "--bottom": "max(calc((100vh - var(--h)) / 4), 2rem)",
-            } as CSSProperties
-          }
+          className="fixed right-1/2 z-10 flex translate-x-1/2 translate-y-1/2 items-center justify-center gap-1 mix-blend-difference"
+          style={{
+            bottom: "max(calc((100vh - var(--h)) / 4), 2rem)",
+          }}
         >
           <div className="h-[1.5em] overflow-hidden">
             {imageArray.map((_, index) => (
               <div
                 key={index}
-                className="translate-y-[--translate-y] transition-all duration-[.8s] ease-out"
-                style={
-                  {
-                    "--translate-y": `-${(currentItem - 1) * 100}%`,
-                  } as CSSProperties
-                }
+                className="transition-all duration-[.8s] ease-out"
+                style={{
+                  transform: `translateY(-${(currentItem - 1) * 100}%)`,
+                }}
               >
                 {index + 1}
               </div>
@@ -103,26 +99,27 @@ export default function Iframe() {
         </div>
         <ScrollerMotion scale={1.25}>
           <motion.ul
-            className="flex min-h-screen items-center pl-[--px]"
-            style={
-              {
-                "--px": "calc(50vw - var(--w) / 2)",
-              } as CSSProperties
-            }
+            className="flex min-h-screen items-center"
+            style={{
+              paddingInline: "calc(50vw - var(--w) / 2)",
+            }}
           >
             {imageArray.map((element, index) => (
               <motion.li
                 key={index}
-                className="w-[--w] shrink-0 select-none bg-[image:--bg-image] bg-cover [&:not(:first-child)]:ml-10"
-                style={
-                  {
-                    height: "min(var(--h), calc(100vh - 1.25rem))",
-                    "--bg-image": `url('${element}')`,
-                  } as CSSProperties
-                }
+                className="w-[--w] shrink-0 select-none bg-cover [&:not(:first-child)]:ml-10"
+                style={{
+                  height: "min(var(--h), calc(100vh - 1.25rem))",
+                  backgroundImage: `url('${element}')`,
+                }}
               />
             ))}
-            <div className="h-1 w-[--px] shrink-0 bg-transparent" />
+            <div
+              className="h-1 shrink-0 bg-transparent"
+              style={{
+                width: "calc(50vw - var(--w) / 2)",
+              }}
+            />
           </motion.ul>
         </ScrollerMotion>
       </main>
