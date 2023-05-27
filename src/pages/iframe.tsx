@@ -76,10 +76,10 @@ export default function Iframe() {
     <>
       <main className="iframe">
         <div
-          className="fixed bottom-[--bottom] right-1/2 z-10 flex translate-x-1/2 items-center justify-center gap-1 mix-blend-difference"
+          className="fixed bottom-[--bottom] right-1/2 z-10 flex translate-x-1/2 translate-y-1/2 items-center justify-center gap-1 mix-blend-difference"
           style={
             {
-              "--bottom": "max(calc((100vh - var(--h)) / 5), 1rem)",
+              "--bottom": "max(calc((100vh - var(--h)) / 4), 2rem)",
             } as CSSProperties
           }
         >

@@ -11,28 +11,26 @@ export default function Navbar({ page }: NavbarProps) {
   return (
     <>
       <nav
-        className="fixed right-1/2 top-[--top] z-10 translate-x-1/2 mix-blend-difference"
+        className="fixed right-1/2 top-[--top] z-10 -translate-y-1/2 translate-x-1/2 mix-blend-difference"
         style={
           {
-            "--top": "max(calc((100vh - var(--h)) / 5), 1rem)",
+            "--top": "max(calc((100vh - var(--h)) / 4), 2rem)",
           } as CSSProperties
         }
       >
-        <div className="flex gap-10">
-          {pages.map((element, id) => (
-            <Link
-              key={element + id.toString()}
-              className={
-                page === element
-                  ? "pointer-events-none"
-                  : "ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] opacity-30 transition-opacity duration-300 hover:opacity-100"
-              }
-              href={element === "Work" ? "/" : `/${element.toLowerCase()}`}
-            >
-              {element}
-            </Link>
-          ))}
-        </div>
+        {pages.map((element, id) => (
+          <Link
+            key={element + id.toString()}
+            className={
+              page === element
+                ? "pointer-events-none mx-5"
+                : "ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] mx-5 opacity-30 transition-opacity duration-300 hover:opacity-100"
+            }
+            href={element === "Work" ? "/" : `/${element.toLowerCase()}`}
+          >
+            {element}
+          </Link>
+        ))}
       </nav>
     </>
   );
