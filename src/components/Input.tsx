@@ -33,7 +33,7 @@ export default function Input({ placeholder, type, customClass }: InputProps) {
       <div
         ref={divRef}
         style={{ "--duration": `${duration}ms` } as CSSProperties}
-        className="relative mb-10 block pb-2 text-4xl after:absolute after:bottom-0 after:right-0 after:h-0.5 after:w-0 after:bg-white after:content-['']"
+        className="relative mb-16 block w-full pb-2 text-4xl after:absolute after:bottom-0 after:right-0 after:h-0.5 after:w-0 after:bg-white after:content-['']"
       >
         {type === "textarea" ? (
           <TextareaAutosize
@@ -43,7 +43,7 @@ export default function Input({ placeholder, type, customClass }: InputProps) {
             placeholder={placeholder}
             onChange={onChange}
             style={{ height: 240 }} // (minRows + 1) * line-height
-            className={`w-full pb-10 bg-transparent resize-none outline-none ${customClass}`}
+            className={`w-full resize-none bg-transparent pb-10 outline-none ${customClass}`}
           />
         ) : (
           <input
