@@ -32,7 +32,7 @@ export default function Input({ placeholder, type }: InputProps) {
       <div
         ref={divRef}
         style={{ "--duration": `${duration}ms` } as CSSProperties}
-        className="relative mb-16 block w-full pb-2 text-4xl after:absolute after:bottom-0 after:right-0 after:h-0.5 after:w-0 after:bg-white after:content-[''] md:mb-20 lg:mb-24 xl:mb-28"
+        className="relative mb-16 block w-full pb-2 text-4xl after:absolute after:bottom-0 after:right-0 after:h-0.5 after:w-0 after:bg-zinc-100 after:content-[''] md:mb-20 lg:mb-24 xl:mb-28"
       >
         {type === "textarea" ? (
           <TextareaAutosize
