@@ -22,6 +22,15 @@ export default function Contact() {
                 <button className="bg-zinc-100 p-4 text-4xl text-zinc-950 outline-none ring-zinc-500 ring-offset-2 ring-offset-zinc-950 hover:cursor-pointer focus:ring-2">
                   Send
                 </button>
+                <div className="mx-auto mt-10 text-sm">
+                  Prefer email?{" "}
+                  <a
+                    href="mailto:ivan@piatachenko.com"
+                    className="font-medium text-zinc-400 underline transition-all hover:text-zinc-100"
+                  >
+                    ivan@piatachenko.com
+                  </a>
+                </div>
               </div>
             </form>
           </div>
