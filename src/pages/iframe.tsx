@@ -59,7 +59,7 @@ export default function Iframe() {
       (imageArray.length - 1);
     const newCurrentItem = Math.floor(scrollLeft / imageWidth + 1.5);
     setCurrentItem(newCurrentItem);
-  }, [scrollLeft]);
+  }, [scrollLeft, windowWidth]);
 
   useEffect(() => {
     function onWheel(e: WheelEvent) {
