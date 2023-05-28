@@ -18,12 +18,10 @@ export default function Contact() {
                 <Input placeholder="your@email.com" type="email" />
               </div>
               <Input placeholder="How can I help?" type="textarea" />
-              <div className="flex justify-center mix-blend-difference">
-                <input
-                  type="submit"
-                  value="Send"
-                  className="-mt-5 translate-y-5 p-4 text-center text-3xl"
-                />
+              <div className="flex flex-col justify-center mix-blend-difference">
+                <button className="bg-zinc-100 p-4 text-4xl text-zinc-950 outline-none ring-zinc-500 ring-offset-2 ring-offset-zinc-950 hover:cursor-pointer focus:ring-2">
+                  Send
+                </button>
               </div>
             </form>
           </div>
