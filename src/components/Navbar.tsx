@@ -20,8 +20,8 @@ export default function Navbar({ page }: NavbarProps) {
             key={element + id.toString()}
             className={
               page === element
-                ? "pointer-events-none mx-5"
-                : "ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] mx-5 opacity-30 transition-opacity duration-300 hover:opacity-100"
+                ? "pointer-events-none px-5 py-2"
+                : "ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] px-5 py-2 opacity-30 transition-opacity duration-300 hover:opacity-100"
             }
             href={element === "Work" ? "/" : `/${element.toLowerCase()}`}
           >
