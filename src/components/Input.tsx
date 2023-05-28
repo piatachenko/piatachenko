@@ -4,10 +4,9 @@ import TextareaAutosize from "react-textarea-autosize";
 interface InputProps {
   placeholder?: string;
   type?: string;
-  customClass?: string;
 }
 
-export default function Input({ placeholder, type, customClass }: InputProps) {
+export default function Input({ placeholder, type }: InputProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const divRef = useRef<HTMLDivElement | null>(null);
@@ -33,17 +32,17 @@ export default function Input({ placeholder, type, customClass }: InputProps) {
       <div
         ref={divRef}
         style={{ "--duration": `${duration}ms` } as CSSProperties}
-        className="relative mb-16 block w-full pb-2 text-4xl after:absolute after:bottom-0 after:right-0 after:h-0.5 after:w-0 after:bg-white after:content-['']"
+        className="relative mb-16 block w-full pb-2 text-4xl after:absolute after:bottom-0 after:right-0 after:h-0.5 after:w-0 after:bg-white after:content-[''] md:mb-20 lg:mb-24 xl:mb-28"
       >
         {type === "textarea" ? (
           <TextareaAutosize
-            minRows={5}
+            minRows={3}
             maxRows={9}
             ref={textareaRef}
             placeholder={placeholder}
             onChange={onChange}
-            style={{ height: 240 }} // (minRows + 1) * line-height
-            className={`w-full resize-none bg-transparent pb-10 outline-none ${customClass}`}
+            style={{ height: 160 }} // (minRows + 1) * line-height
+            className="w-full resize-none bg-transparent outline-none"
           />
         ) : (
           <input
@@ -51,7 +50,7 @@ export default function Input({ placeholder, type, customClass }: InputProps) {
             type={"text"}
             placeholder={placeholder}
             onChange={onChange}
-            className={`w-full bg-transparent outline-none ${customClass}`}
+            className="w-full bg-transparent outline-none"
           />
         )}
       </div>
