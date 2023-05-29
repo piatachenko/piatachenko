@@ -24,6 +24,14 @@ export default function Input({ placeholder, type }: InputProps) {
     }
   }
 
+  function onFocus(e: ChangeEvent<HTMLTextAreaElement>) {
+    if (e.target.tagName.toLowerCase() === "textarea") {
+      divRef.current
+        ?.querySelector("div[contenteditable]")
+        ?.setAttribute("tabIndex", "-1");
+    }
+  }
+
   return (
     <>
       <div
@@ -37,6 +45,7 @@ export default function Input({ placeholder, type }: InputProps) {
             maxRows={9}
             placeholder={placeholder}
             onChange={onChange}
+            onFocus={onFocus}
             style={{ height: 160 }} // (minRows + 1) * line-height
             className="w-full resize-none bg-transparent outline-none"
           />
