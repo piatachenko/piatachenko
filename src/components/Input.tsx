@@ -1,4 +1,10 @@
-import { useRef, type CSSProperties, type ChangeEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ChangeEvent,
+} from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 interface InputProps {
@@ -24,13 +30,17 @@ export default function Input({ placeholder, type }: InputProps) {
     }
   }
 
-  function onFocus(e: ChangeEvent<HTMLTextAreaElement>) {
-    if (e.target.tagName.toLowerCase() === "textarea") {
-      divRef.current
-        ?.querySelector("div[contenteditable]")
-        ?.setAttribute("tabIndex", "-1");
-    }
-  }
+  useEffect(() => {
+    const observer = new MutationObserver((_, observer) => {
+      const el = document.querySelector("div[contenteditable]");
+      if (el) {
+        el.setAttribute("tabIndex", "-1");
+        observer.disconnect();
+      }
+    });
+    observer.observe(document, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -45,7 +55,6 @@ export default function Input({ placeholder, type }: InputProps) {
             maxRows={9}
             placeholder={placeholder}
             onChange={onChange}
-            onFocus={onFocus}
             style={{ height: 160 }} // (minRows + 1) * line-height
             className="w-full resize-none bg-transparent outline-none"
           />
