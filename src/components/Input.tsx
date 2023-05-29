@@ -1,7 +1,6 @@
 import {
   useEffect,
   useRef,
-  useState,
   type CSSProperties,
   type ChangeEvent,
 } from "react";
