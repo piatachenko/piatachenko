@@ -1,4 +1,4 @@
-import { useRef, type CSSProperties } from "react";
+import { useRef, type CSSProperties, type ChangeEvent } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 interface InputProps {
@@ -7,20 +7,17 @@ interface InputProps {
 }
 
 export default function Input({ placeholder, type }: InputProps) {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const divRef = useRef<HTMLDivElement | null>(null);
   const duration = 700;
 
-  function onChange() {
-    const input = inputRef.current ?? textareaRef.current;
+  function onChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const div = divRef.current;
-    if (input && div) {
-      if (input.value) {
+    if (e.target && div) {
+      if (e.target.value) {
         div.classList.remove("slide-out");
         div.classList.add("slide-in");
       }
-      if (!input.value) {
+      if (!e.target.value) {
         div.classList.add("slide-out");
         div.classList.remove("slide-in");
       }
@@ -38,7 +35,6 @@ export default function Input({ placeholder, type }: InputProps) {
           <TextareaAutosize
             minRows={3}
             maxRows={9}
-            ref={textareaRef}
             placeholder={placeholder}
             onChange={onChange}
             style={{ height: 160 }} // (minRows + 1) * line-height
@@ -46,7 +42,6 @@ export default function Input({ placeholder, type }: InputProps) {
           />
         ) : (
           <input
-            ref={inputRef}
             type={"text"}
             placeholder={placeholder}
             onChange={onChange}
