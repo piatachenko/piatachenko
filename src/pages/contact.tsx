@@ -16,12 +16,14 @@ export default function Contact() {
       </Head>
       <MainLayout page="Contact">
         <main>
-          <div className="flex min-h-screen items-center px-[2rem] py-24 sm:px-[3rem] md:px-[7%] xl:px-[10%] 2xl:px-[13%]">
-            <form
-              onSubmit={handleSubmit}
-              className="w-full"
-              style={{ paddingTop: "min(2.5rem, 3vh)" }}
-            >
+          <div
+            className="px-[6%] pb-9 sm:px-[3rem] md:px-[7%] xl:px-[10%] 2xl:px-[13%]"
+            style={{
+              paddingTop:
+                "calc((max(100vh, calc(var(--h) + 8rem)) - var(--h)) / 2)",
+            }}
+          >
+            <form onSubmit={handleSubmit} className="w-full">
               <div className="gap-10 md:flex xl:gap-20 2xl:gap-24">
                 <Input placeholder="Your name" />
                 <Input placeholder="your@email.com" type="email" />
