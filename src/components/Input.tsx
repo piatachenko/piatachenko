@@ -1,9 +1,4 @@
-import {
-  useEffect,
-  useRef,
-  type CSSProperties,
-  type ChangeEvent,
-} from "react";
+import { useEffect, useRef, type CSSProperties, type ChangeEvent } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 interface InputProps {
@@ -55,14 +50,14 @@ export default function Input({ placeholder, type }: InputProps) {
             placeholder={placeholder}
             onChange={onChange}
             style={{ height: 160 }} // (minRows + 1) * line-height
-            className="w-full resize-none bg-transparent outline-none"
+            className="w-full resize-none bg-transparent placeholder-zinc-400 outline-none"
           />
         ) : (
           <input
             type={"text"}
             placeholder={placeholder}
             onChange={onChange}
-            className="w-full bg-transparent outline-none"
+            className="w-full bg-transparent placeholder-zinc-400 outline-none"
           />
         )}
       </div>
