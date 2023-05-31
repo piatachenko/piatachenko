@@ -55,6 +55,7 @@ export default function MyApp({
         <iframe
           ref={iframeRef}
           src="/iframe"
+          title="Carousel"
           className={
             router.pathname === "/" ? "absolute h-full w-full" : "hidden"
           }
