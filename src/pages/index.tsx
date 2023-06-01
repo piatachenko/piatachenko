@@ -68,7 +68,7 @@ export default function Home() {
           <div>-</div>
           <div>{imageArray.length}</div>
         </div>
-        <div className="fixed bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 mix-blend-difference before:absolute before:bottom-1/2 before:right-1/2 before:block before:h-[.11rem] before:w-7 before:translate-x-1/2 before:translate-y-1/2 before:rotate-90 before:bg-white before:content-[''] after:absolute after:bottom-1/2 after:right-1/2 after:block after:h-[.11rem] after:w-7 after:translate-x-1/2 after:translate-y-1/2 after:bg-white after:content-['']" />
+        <div className="fixed bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 mix-blend-difference before:absolute before:bottom-1/2 before:right-1/2 before:block before:h-[.11rem] before:w-7 before:translate-x-1/2 before:translate-y-1/2 before:rotate-90 before:bg-zinc-100 before:content-[''] after:absolute after:bottom-1/2 after:right-1/2 after:block after:h-[.11rem] after:w-7 after:translate-x-1/2 after:translate-y-1/2 after:bg-zinc-100 after:content-['']" />
       </MainLayout>
     </>
   );
