@@ -21,6 +21,14 @@ body {
   @apply bg-zinc-800 hover:bg-zinc-700;
 }
 
+.container-input:has(.error-input)::before {
+  @apply absolute bottom-0 z-10 h-0.5 w-full bg-red-300 content-[''];
+}
+
+.error-input {
+  @apply text-red-500/80 placeholder-red-300;
+}
+
 .slide-in::after {
   @apply animate-[slide-in_var(--duration)_forwards];
 }
