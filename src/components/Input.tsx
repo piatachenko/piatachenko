@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ChangeEvent, type CSSProperties } from "react";
+import { useEffect, useRef, type ChangeEvent } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 
 interface InputProps {
@@ -10,7 +10,6 @@ interface InputProps {
 
 export default function Input({ type, ...props }: InputProps) {
   const divRef = useRef<HTMLDivElement | null>(null);
-  const duration = 700;
 
   function onChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     e.target.classList.remove("error-input");
@@ -43,7 +42,6 @@ export default function Input({ type, ...props }: InputProps) {
     <>
       <div
         ref={divRef}
-        style={{ "--duration": `${duration}ms` } as CSSProperties}
         className="container-input relative mb-16 block w-full pb-2 text-4xl after:absolute after:bottom-0 after:right-0 after:h-0.5 after:w-0 after:bg-zinc-100 after:content-[''] md:mb-20 lg:mb-24 xl:mb-28"
       >
         {type === "textarea" ? (

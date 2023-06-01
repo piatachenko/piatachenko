@@ -8,6 +8,10 @@
   --h: 30rem;
 }
 
+form {
+  --duration: 700ms;
+}
+
 html,
 body {
   @apply overscroll-none;
