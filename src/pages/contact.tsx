@@ -4,8 +4,45 @@ import Input from "~/components/Input";
 import MainLayout from "~/layouts/MainLayout";
 
 export default function Contact() {
+  const fieldNames = ["name", "email", "message"];
+
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
+
+    let data = {};
+    let hasError = false;
+
+    fieldNames.forEach((fieldName) => {
+      const fieldElement = (e.target as HTMLElement)[
+        fieldName as keyof HTMLElement
+      ];
+      if (
+        fieldElement instanceof HTMLInputElement ||
+        fieldElement instanceof HTMLTextAreaElement
+      ) {
+        data = {
+          ...data,
+          [fieldName]: fieldElement.value,
+        };
+
+        if (!fieldElement.value) {
+          fieldElement.classList.add("error-input");
+          hasError = true;
+          return;
+        }
+
+        if (fieldName === "email" && !emailPattern.test(fieldElement.value)) {
+          fieldElement.classList.add("error-input");
+          hasError = true;
+        }
+      }
+    });
+
+    if (hasError) {
+      return;
+    }
   }
 
   return (
@@ -17,18 +54,23 @@ export default function Contact() {
       <MainLayout page="Contact">
         <main>
           <div
-            className="px-[6%] pb-9 sm:px-[3rem] md:px-[7%] xl:px-[10%] 2xl:px-[13%]"
+            className="px-[6%] pb-10 sm:px-[3rem] md:px-[7%] xl:px-[10%] 2xl:px-[13%]"
             style={{
               paddingTop:
-                "calc((max(100vh, calc(var(--h) + 8rem)) - var(--h)) / 2)",
+                "calc((max(102.5vh, calc(var(--h) + 8rem)) - var(--h)) / 2)",
             }}
           >
             <form onSubmit={handleSubmit} className="w-full">
               <div className="gap-10 md:flex xl:gap-20 2xl:gap-24">
-                <Input placeholder="Your name" />
-                <Input placeholder="your@email.com" type="email" />
+                <Input placeholder="Your name" id="name" name="name" />
+                <Input placeholder="your@email.com" id="email" name="email" />
               </div>
-              <Input placeholder="How can I help?" type="textarea" />
+              <Input
+                placeholder="How can I help?"
+                type="textarea"
+                id="message"
+                name="message"
+              />
               <div className="flex flex-col justify-center mix-blend-difference">
                 <button className="bg-zinc-100 p-2 text-4xl text-zinc-950 outline-none ring-zinc-500 ring-offset-2 ring-offset-zinc-950 hover:cursor-pointer focus:ring-2">
                   Send
