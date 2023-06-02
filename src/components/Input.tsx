@@ -50,7 +50,7 @@ export default function Input({ type, ...props }: InputProps) {
             maxRows={9}
             {...props}
             onChange={onChange}
-            style={{ height: 160 }} // (minRows + 1) * line-height
+            style={{ height: 120 }} // minRows * line-height
             className="w-full resize-none bg-transparent placeholder-zinc-400 outline-none"
           />
         ) : (
