@@ -8,10 +8,9 @@ export default function Contact() {
 
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    let data = {};
     let hasError = false;
 
     fieldNames.forEach((fieldName) => {
@@ -22,11 +21,6 @@ export default function Contact() {
         fieldElement instanceof HTMLInputElement ||
         fieldElement instanceof HTMLTextAreaElement
       ) {
-        data = {
-          ...data,
-          [fieldName]: fieldElement.value,
-        };
-
         if (!fieldElement.value) {
           fieldElement.classList.add("is-empty");
           hasError = true;
@@ -46,6 +40,15 @@ export default function Contact() {
     if (hasError) {
       return;
     }
+
+    const formData = new FormData(e.target as HTMLFormElement);
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      body: JSON.stringify(Object.fromEntries(formData)),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
 
   return (
