@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useContext, useEffect, useState } from "react";
 import MainLayout from "~/layouts/MainLayout";
-import { ScrollPositionContext } from "./_app";
 import { imageArray } from "./iframe";
+import { ScrollPositionContext } from "./_app";
 
 export default function Home() {
   const [windowWidth, setWindowWidth] = useState(0);

@@ -12,14 +12,18 @@ export default function Input({ type, ...props }: InputProps) {
   const divRef = useRef<HTMLDivElement | null>(null);
 
   function onChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    e.target.classList.remove("error-input");
+    const el = e.target;
+    el.classList.remove("is-empty");
+    el.classList.remove("is-invalid");
+    el.classList.remove("is-valid");
+
     const div = divRef.current;
-    if (e.target && div) {
-      if (e.target.value) {
+    if (el && div) {
+      if (el.value) {
         div.classList.remove("slide-out");
         div.classList.add("slide-in");
       }
-      if (!e.target.value) {
+      if (!el.value) {
         div.classList.add("slide-out");
         div.classList.remove("slide-in");
       }

@@ -25,12 +25,28 @@ body {
   @apply bg-zinc-800 hover:bg-zinc-700;
 }
 
-.container-input:has(.error-input)::before {
-  @apply absolute bottom-0 z-10 h-0.5 w-full bg-red-300 content-[''];
+.container-input:has(.is-empty)::before {
+  @apply absolute bottom-0 z-10 h-0.5 animate-[slide-in-out_1.75s] bg-red-300 content-[''];
 }
 
-.error-input {
-  @apply text-red-500/80 placeholder-red-300;
+.is-empty {
+  @apply animate-[fade-in_1s] text-red-300 placeholder-red-300;
+}
+
+.container-input:has(.is-invalid)::after {
+  @apply bg-red-500;
+}
+
+.is-invalid {
+  @apply animate-[fade-in_1s] text-red-500;
+}
+
+.container-input:has(.is-valid)::after {
+  @apply bg-green-500;
+}
+
+.is-valid {
+  @apply text-green-500;
 }
 
 .slide-in::after {
@@ -52,6 +68,21 @@ body {
 
 @keyframes slide-out {
   0% {
+    @apply right-0 w-full;
+  }
+  100% {
+    @apply right-0 w-0;
+  }
+}
+
+@keyframes slide-in-out {
+  0% {
+    @apply left-0 w-0;
+  }
+  37% {
+    @apply left-0 w-full;
+  }
+  57% {
     @apply right-0 w-full;
   }
   100% {

@@ -28,15 +28,18 @@ export default function Contact() {
         };
 
         if (!fieldElement.value) {
-          fieldElement.classList.add("error-input");
+          fieldElement.classList.add("is-empty");
           hasError = true;
           return;
         }
 
         if (fieldName === "email" && !emailPattern.test(fieldElement.value)) {
-          fieldElement.classList.add("error-input");
+          fieldElement.classList.add("is-invalid");
           hasError = true;
+          return;
         }
+
+        fieldElement.classList.add("is-valid");
       }
     });
 
