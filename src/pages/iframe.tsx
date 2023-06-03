@@ -1,17 +1,38 @@
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useEffect } from "react";
 import { ScrollerMotion } from "scroller-motion";
 
-export const imageArray = [
-  "/assets/instrument.webp",
-  "/assets/lobe-ai.webp",
-  "/assets/oh-studio.webp",
-  "/assets/backstage-talks.webp",
-  "/assets/ableton.webp",
+export const projects = [
+  {
+    image: "/assets/instrument.webp",
+    demo: "https://instrument-com-clone.vercel.app/",
+    code: "https://github.com/piatachenko/instrument-com-clone",
+  },
+  {
+    image: "/assets/lobe-ai.webp",
+    demo: "https://lobeai-clone.vercel.app/",
+    code: "https://github.com/piatachenko/lobe-ai-tour-page-next-sass-clone",
+  },
+  {
+    image: "/assets/oh-studio.webp",
+    demo: "https://ohstudio-clone.vercel.app/",
+    code: "https://github.com/piatachenko/oh-studio-next-clone",
+  },
+  {
+    image: "/assets/backstage-talks.webp",
+    demo: "https://backstage-talks-next.vercel.app/",
+    code: "https://github.com/piatachenko/backstage-talks-next-clone",
+  },
+  {
+    image: "/assets/ableton.webp",
+    demo: "https://ableton-nextjs.vercel.app/",
+    code: "https://github.com/piatachenko/ableton-homepage-nextjs-clone",
+  },
 ];
 
 export default function Iframe() {
-    useEffect(() => {
+  useEffect(() => {
     function onWheel(e: WheelEvent) {
       if (!e.deltaY) {
         return;
@@ -32,15 +53,33 @@ export default function Iframe() {
               paddingInline: "calc(50vw - var(--w) / 2)",
             }}
           >
-            {imageArray.map((element, index) => (
+            {projects.map((element, index) => (
               <motion.li
                 key={index}
-                className="w-[--w] shrink-0 select-none bg-cover [&:not(:first-child)]:ml-10"
+                className="group relative shrink-0 [&:not(:first-child)]:ml-10 [&_*]:select-none"
                 style={{
+                  width: "var(--w)",
                   height: "min(var(--h), calc(100vh - 1.25rem))",
-                  backgroundImage: `url('${element}')`,
                 }}
-              />
+              >
+                <div className="absolute inset-0 -z-20 group-hover:bg-black">
+                  <div
+                    className="absolute inset-0 -z-10 bg-cover transition-opacity duration-[.4s] group-hover:opacity-[.15] group-hover:delay-100"
+                    style={{
+                      backgroundImage: `url('${element.image}')`,
+                    }}
+                  />
+                </div>
+                <div className="flex h-full flex-col items-center justify-around py-5 opacity-0 transition-all duration-[.4s] group-hover:opacity-100 group-hover:delay-100">
+                  <div className="opacity-0">Logo</div>
+                  <Link href={element.demo} className="border-2 px-6 py-3">
+                    Open Live
+                  </Link>
+                  <Link href={element.code} className="underline">
+                    Source Code
+                  </Link>
+                </div>
+              </motion.li>
             ))}
             <div
               className="h-1 shrink-0 bg-transparent"
