@@ -52,6 +52,9 @@ export default function Contact() {
       headers: {
         "Content-Type": "application/json",
       },
+    }).catch((error) => {
+      console.error('Error:', error);
+      throw error;
     });
 
     if (response.status >= 200 && response.status < 300) {
