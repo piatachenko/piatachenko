@@ -103,10 +103,16 @@ export default function Contact() {
             }}
           >
             <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                await handleSubmit(e);
-              }}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  (async () => {
+                    try {
+                      await handleSubmit(e);
+                    } catch (error) {
+                      console.error(error);
+                    }
+                  })();
+                }}
               className="w-full"
             >
               <div className="gap-10 md:flex xl:gap-20 2xl:gap-24">
