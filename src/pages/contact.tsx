@@ -103,9 +103,9 @@ export default function Contact() {
             }}
           >
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                handleSubmit(e);
+                await handleSubmit(e);
               }}
               className="w-full"
             >
