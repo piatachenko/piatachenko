@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import Input from "~/components/Input";
 import MainLayout from "~/layouts/MainLayout";
 
@@ -8,9 +8,10 @@ export default function Contact() {
 
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
 
+  async function handleSubmit(e: FormEvent) {
     let hasError = false;
 
     fieldNames.forEach((fieldName) => {
@@ -41,6 +42,8 @@ export default function Contact() {
       return;
     }
 
+    setIsCorrect(true);
+
     const formData = new FormData(e.target as HTMLFormElement);
     const response = await fetch("/api/contact", {
       method: "POST",
@@ -49,6 +52,10 @@ export default function Contact() {
         "Content-Type": "application/json",
       },
     });
+
+    if (response.ok) {
+      setIsSuccess(true);
+    }
   }
 
   return (
@@ -59,6 +66,27 @@ export default function Contact() {
       </Head>
       <MainLayout page="Contact">
         <main>
+          {!!isCorrect && (
+            <>
+              <div className="absolute inset-0 z-10 backdrop-blur-sm">
+                <div className="absolute bottom-1/2 rounded-xl right-1/2 m-3 flex min-h-[10rem] w-full max-w-lg translate-x-1/2 translate-y-1/2 items-center justify-center bg-black">
+                  {isSuccess ? (
+                    <>
+                      <button
+                        onClick={() => {setIsSuccess(false); setIsCorrect(false)}}
+                        className="absolute right-3 top-3"
+                      >
+                        Close
+                      </button>
+                      <span>Success</span>
+                    </>
+                  ) : (
+                    <>Sending...</>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
           <div
             className="px-[6%] pb-10 sm:px-[3rem] md:px-[7%] xl:px-[10%] 2xl:px-[13%]"
             style={{
@@ -66,7 +94,13 @@ export default function Contact() {
                 "calc((max(102.5vh, calc(var(--h) + 8rem)) - var(--h)) / 2)",
             }}
           >
-            <form onSubmit={handleSubmit} className="w-full">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit(e);
+              }}
+              className="w-full"
+            >
               <div className="gap-10 md:flex xl:gap-20 2xl:gap-24">
                 <Input placeholder="Your name" id="name" name="name" />
                 <Input placeholder="your@email.com" id="email" name="email" />
