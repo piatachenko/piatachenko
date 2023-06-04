@@ -34,7 +34,10 @@ export default function Admin({ formDatas }: Props) {
   const [isAdmin, setIsAdmin] = useState(false);
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (e.target.password.value === process.env.NEXT_PUBLIC_PASS) {
+    const target = e.target as typeof e.target & {
+      password: { value: string };
+    };
+    if (target.password.value === process.env.NEXT_PUBLIC_PASS) {
       setIsAdmin(true);
     }
   }
@@ -45,7 +48,8 @@ export default function Admin({ formDatas }: Props) {
     return (
       <main className="flex min-h-screen items-center justify-center">
         <form onSubmit={handleSubmit} className="flex">
-          <input type="password"
+          <input
+            type="password"
             name="password"
             id="password"
             className="border-2 bg-transparent p-1 text-5xl outline-none"
