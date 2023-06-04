@@ -10,6 +10,7 @@ export default function Contact() {
 
   const [isSuccess, setIsSuccess] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   async function handleSubmit(e: FormEvent) {
     let hasError = false;
@@ -53,8 +54,10 @@ export default function Contact() {
       },
     });
 
-    if (response.ok) {
+    if (response.status >= 200 && response.status < 300) {
       setIsSuccess(true);
+    } else {
+      setIsError(true);
     }
   }
 
@@ -69,17 +72,22 @@ export default function Contact() {
           {!!isCorrect && (
             <>
               <div className="absolute inset-0 z-10 backdrop-blur-sm">
-                <div className="absolute bottom-1/2 rounded-xl right-1/2 m-3 flex min-h-[10rem] w-full max-w-lg translate-x-1/2 translate-y-1/2 items-center justify-center bg-black">
+                <div className="absolute bottom-1/2 right-1/2 m-3 flex min-h-[10rem] w-full max-w-lg translate-x-1/2 translate-y-1/2 items-center justify-center rounded-xl bg-black">
                   {isSuccess ? (
                     <>
                       <button
-                        onClick={() => {setIsSuccess(false); setIsCorrect(false)}}
+                        onClick={() => {
+                          setIsSuccess(false);
+                          setIsCorrect(false);
+                        }}
                         className="absolute right-3 top-3"
                       >
                         Close
                       </button>
                       <span>Success</span>
                     </>
+                  ) : isError ? (
+                    <>Something went wrong</>
                   ) : (
                     <>Sending...</>
                   )}
