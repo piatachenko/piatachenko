@@ -79,21 +79,20 @@ export default function Contact() {
         <main>
           {!!isCorrect && (
             <>
-              <div className="absolute inset-0 z-10 backdrop-blur-sm">
+              <div className="fixed inset-0 z-10 backdrop-blur-sm">
                 <div className="absolute bottom-1/2 right-1/2 m-3 flex min-h-[10rem] w-full max-w-lg translate-x-1/2 translate-y-1/2 items-center justify-center rounded-xl bg-black">
+                  <button
+                    onClick={() => {
+                      setIsSuccess(false);
+                      setIsCorrect(false);
+                      setIsError(false);
+                    }}
+                    className="absolute right-3 top-3"
+                  >
+                    Close
+                  </button>
                   {isSuccess ? (
-                    <>
-                      <button
-                        onClick={() => {
-                          setIsSuccess(false);
-                          setIsCorrect(false);
-                        }}
-                        className="absolute right-3 top-3"
-                      >
-                        Close
-                      </button>
-                      <span>Success</span>
-                    </>
+                    <>Success</>
                   ) : isError ? (
                     <>Something went wrong</>
                   ) : (
