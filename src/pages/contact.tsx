@@ -12,7 +12,9 @@ export default function Contact() {
   const [isCorrect, setIsCorrect] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  async function handleSubmit(e: FormEvent) {
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+
     let hasError = false;
 
     fieldNames.forEach((fieldName) => {
@@ -46,26 +48,25 @@ export default function Contact() {
     setIsCorrect(true);
 
     const formData = new FormData(e.target as HTMLFormElement);
-    let response;
-    try {
-      response = await fetch("/api/contact", {
-        method: "POST",
-        body: JSON.stringify(Object.fromEntries(formData)),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    } catch (error) {
-      console.error("Error:", error);
-      setIsError(true);
-      return;
-    }
 
-    if (response.status >= 200 && response.status < 300) {
-      setIsSuccess(true);
-    } else {
-      setIsError(true);
-    }
+    fetch("/api/contact", {
+      method: "POST",
+      body: JSON.stringify(Object.fromEntries(formData)),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          setIsSuccess(true);
+        } else {
+          setIsError(true);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsError(true);
+      });
   }
 
   return (
@@ -109,19 +110,7 @@ export default function Contact() {
                 "calc((max(102.5vh, calc(var(--h) + 8rem)) - var(--h)) / 2)",
             }}
           >
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                (async () => {
-                  try {
-                    await handleSubmit(e);
-                  } catch (error) {
-                    console.error(error);
-                  }
-                })();
-              }}
-              className="w-full"
-            >
+            <form onSubmit={handleSubmit} className="w-full">
               <div className="gap-10 md:flex xl:gap-20 2xl:gap-24">
                 <Input placeholder="Your name" id="name" name="name" />
                 <Input placeholder="your@email.com" id="email" name="email" />
