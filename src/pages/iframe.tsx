@@ -58,24 +58,34 @@ export default function Iframe() {
                 key={index}
                 className="group relative shrink-0 [&:not(:first-child)]:ml-10 [&_*]:select-none"
                 style={{
+                  transitionDuration: "0s",
+                  transitionDelay: "0s",
                   width: "var(--w)",
                   height: "min(var(--h), calc(100vh - 1.25rem))",
                 }}
               >
                 <div className="absolute inset-0 -z-20 group-hover:bg-black">
                   <div
-                    className="absolute inset-0 -z-10 bg-cover transition-opacity duration-[.4s] group-hover:opacity-[.15] group-hover:delay-100"
+                    className="absolute inset-0 -z-10 bg-cover transition-opacity duration-[.4s] group-hover:opacity-40 group-hover:delay-100"
                     style={{
                       backgroundImage: `url('${element.image}')`,
                     }}
                   />
                 </div>
-                <div className="flex h-full flex-col items-center justify-around py-5 opacity-0 transition-all duration-[.4s] group-hover:opacity-100 group-hover:delay-100">
+                <div className="flex h-full flex-col items-center justify-around py-7 opacity-0 transition-all duration-[.4s] group-hover:opacity-100 group-hover:delay-100">
                   <div className="opacity-0">Logo</div>
-                  <Link href={element.demo} className="border-2 px-6 py-3">
+                  <Link
+                    href={element.demo}
+                    target="_blank"
+                    className="border-2 px-6 py-3"
+                  >
                     Open Live
                   </Link>
-                  <Link href={element.code} className="underline">
+                  <Link
+                    href={element.code}
+                    target="_blank"
+                    className="underline"
+                  >
                     Source Code
                   </Link>
                 </div>
