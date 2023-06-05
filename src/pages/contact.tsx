@@ -46,16 +46,20 @@ export default function Contact() {
     setIsCorrect(true);
 
     const formData = new FormData(e.target as HTMLFormElement);
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      body: JSON.stringify(Object.fromEntries(formData)),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).catch((error) => {
-      console.error('Error:', error);
-      throw error;
-    });
+    let response;
+    try {
+      response = await fetch("/api/contact", {
+        method: "POST",
+        body: JSON.stringify(Object.fromEntries(formData)),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      setIsError(true);
+      return;
+    }
 
     if (response.status >= 200 && response.status < 300) {
       setIsSuccess(true);
@@ -106,16 +110,16 @@ export default function Contact() {
             }}
           >
             <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  (async () => {
-                    try {
-                      await handleSubmit(e);
-                    } catch (error) {
-                      console.error(error);
-                    }
-                  })();
-                }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                (async () => {
+                  try {
+                    await handleSubmit(e);
+                  } catch (error) {
+                    console.error(error);
+                  }
+                })();
+              }}
               className="w-full"
             >
               <div className="gap-10 md:flex xl:gap-20 2xl:gap-24">
