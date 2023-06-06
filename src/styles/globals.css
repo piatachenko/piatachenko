@@ -26,11 +26,11 @@ body {
 }
 
 .container-input:has(.is-empty)::before {
-  @apply absolute bottom-0 z-10 h-0.5 animate-[slide-in-out_1.75s] bg-red-300 content-[''];
+  @apply absolute bottom-0 z-10 h-0.5 animate-[slide-in-out_1.75s] bg-red-400 content-[''];
 }
 
 .is-empty {
-  @apply animate-[fade-in_1s] text-red-300 placeholder-red-300;
+  @apply animate-[fade-in_1s] text-red-400 placeholder-red-400;
 }
 
 .container-input:has(.is-invalid)::after {
@@ -47,6 +47,18 @@ body {
 
 .is-valid {
   @apply text-green-500;
+}
+
+.btn-loading {
+  @apply bg-opacity-50;
+}
+
+.btn-success {
+  @apply text-green-500 bg-transparent;
+}
+
+.btn-destructive {
+  @apply text-red-500 bg-transparent;
 }
 
 .slide-in::after {

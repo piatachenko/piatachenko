@@ -12,6 +12,11 @@ export default function Contact() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isFailure, setIsFailure] = useState(false);
 
+  function resetStates() {
+    setIsSuccess(false);
+    setIsFailure(false);
+  }
+
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
@@ -36,8 +41,6 @@ export default function Contact() {
           hasError = true;
           return;
         }
-
-        fieldElement.classList.add("is-valid");
       }
     });
 
@@ -89,14 +92,28 @@ export default function Contact() {
           >
             <form onSubmit={handleSubmit} className="w-full">
               <div className="gap-10 md:flex xl:gap-20 2xl:gap-24">
-                <Input placeholder="Your name" id="name" name="name" />
-                <Input placeholder="your@email.com" id="email" name="email" />
+                <Input
+                  placeholder="Your name"
+                  id="name"
+                  name="name"
+                  handleChange={resetStates}
+                  isSuccess={isSuccess}
+                />
+                <Input
+                  placeholder="your@email.com"
+                  id="email"
+                  name="email"
+                  handleChange={resetStates}
+                  isSuccess={isSuccess}
+                />
               </div>
               <Input
                 placeholder="How can I help?"
                 type="textarea"
                 id="message"
                 name="message"
+                handleChange={resetStates}
+                isSuccess={isSuccess}
               />
               <div className="flex flex-col justify-center mix-blend-difference">
                 <button

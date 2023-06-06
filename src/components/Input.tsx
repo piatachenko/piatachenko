@@ -3,19 +3,28 @@ import TextareaAutosize from "react-textarea-autosize";
 
 interface InputProps {
   type?: string;
+  handleChange?: () => void;
+  isSuccess?: boolean;
   placeholder?: string;
   id?: string;
   name?: string;
 }
 
-export default function Input({ type, ...props }: InputProps) {
+export default function Input({
+  type,
+  handleChange,
+  isSuccess,
+  ...props
+}: InputProps) {
   const divRef = useRef<HTMLDivElement | null>(null);
 
   function onChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    if (handleChange) {
+      handleChange();
+    }
     const el = e.target;
     el.classList.remove("is-empty");
     el.classList.remove("is-invalid");
-    el.classList.remove("is-valid");
 
     const div = divRef.current;
     if (el && div) {
@@ -55,14 +64,18 @@ export default function Input({ type, ...props }: InputProps) {
             {...props}
             onChange={onChange}
             style={{ height: 120 }} // minRows * line-height
-            className="w-full resize-none bg-transparent placeholder-zinc-400 outline-none"
+            className={`w-full resize-none bg-transparent placeholder-zinc-400 outline-none ${
+              !!isSuccess && "is-valid"
+            }`}
           />
         ) : (
           <input
             type={"text"}
             {...props}
             onChange={onChange}
-            className="w-full bg-transparent placeholder-zinc-400 outline-none"
+            className={`w-full bg-transparent placeholder-zinc-400 outline-none ${
+              !!isSuccess && "is-valid"
+            }`}
           />
         )}
       </div>
