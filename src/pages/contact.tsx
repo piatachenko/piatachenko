@@ -8,9 +8,9 @@ export default function Contact() {
 
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+  const [isSending, setIsSending] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isFailure, setIsFailure] = useState(false);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -45,7 +45,7 @@ export default function Contact() {
       return;
     }
 
-    setIsCorrect(true);
+    setIsSending(true);
 
     const formData = new FormData(e.target as HTMLFormElement);
 
@@ -58,14 +58,17 @@ export default function Contact() {
     })
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {
+          setIsSending(false);
           setIsSuccess(true);
         } else {
-          setIsError(true);
+          setIsSending(false);
+          setIsFailure(true);
         }
       })
       .catch((error) => {
         console.error(error);
-        setIsError(true);
+        setIsSending(false);
+        setIsFailure(true);
       });
   }
 
@@ -77,31 +80,6 @@ export default function Contact() {
       </Head>
       <MainLayout page="Contact">
         <main>
-          {!!isCorrect && (
-            <>
-              <div className="fixed inset-0 z-10 backdrop-blur-sm">
-                <div className="absolute bottom-1/2 right-1/2 m-3 flex min-h-[10rem] w-full max-w-lg translate-x-1/2 translate-y-1/2 items-center justify-center rounded-xl bg-black">
-                  <button
-                    onClick={() => {
-                      setIsSuccess(false);
-                      setIsCorrect(false);
-                      setIsError(false);
-                    }}
-                    className="absolute right-3 top-3"
-                  >
-                    Close
-                  </button>
-                  {isSuccess ? (
-                    <>Success</>
-                  ) : isError ? (
-                    <>Something went wrong</>
-                  ) : (
-                    <>Sending...</>
-                  )}
-                </div>
-              </div>
-            </>
-          )}
           <div
             className="px-[6%] pb-10 sm:px-[3rem] md:px-[7%] xl:px-[10%] 2xl:px-[13%]"
             style={{
@@ -121,8 +99,27 @@ export default function Contact() {
                 name="message"
               />
               <div className="flex flex-col justify-center mix-blend-difference">
-                <button className="bg-zinc-100 p-2 text-4xl text-zinc-950 outline-none ring-zinc-500 ring-offset-2 ring-offset-zinc-950 hover:cursor-pointer focus:ring-2">
-                  Send
+                <button
+                  className={`bg-zinc-100 p-2 text-4xl text-zinc-950 outline-none ring-zinc-500 ring-offset-2 ring-offset-zinc-950 hover:cursor-pointer focus:ring-2 disabled:cursor-auto ${
+                    !!isSending && "btn-loading"
+                  } ${!!isSuccess && "btn-success"} ${
+                    !!isFailure && "btn-destructive"
+                  }`}
+                  disabled={isSending || isSuccess || isFailure}
+                >
+                  {isSending ? (
+                    <>
+                      Sending<span className="wait-dot">.</span>
+                      <span className="wait-dot">.</span>
+                      <span className="wait-dot">.</span>
+                    </>
+                  ) : isSuccess ? (
+                    "Success! Appreciate your message. I'll be in touch soon."
+                  ) : isFailure ? (
+                    "Something went wrong"
+                  ) : (
+                    "Send"
+                  )}
                 </button>
                 <div className="mx-auto mt-10 text-sm">
                   Prefer email?{" "}
