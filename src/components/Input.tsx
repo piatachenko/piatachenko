@@ -65,7 +65,7 @@ export default function Input({
             onChange={onChange}
             style={{ height: 120 }} // minRows * line-height
             className={`w-full resize-none bg-transparent placeholder-zinc-400 outline-none ${
-              !!isSuccess && "is-valid"
+              isSuccess ? "is-valid" : ""
             }`}
           />
         ) : (
@@ -74,7 +74,7 @@ export default function Input({
             {...props}
             onChange={onChange}
             className={`w-full bg-transparent placeholder-zinc-400 outline-none ${
-              !!isSuccess && "is-valid"
+              isSuccess ? "is-valid" : ""
             }`}
           />
         )}

@@ -118,9 +118,13 @@ export default function Contact() {
               <div className="flex flex-col justify-center mix-blend-difference">
                 <button
                   className={`bg-zinc-100 p-2 text-4xl text-zinc-950 outline-none ring-zinc-500 ring-offset-2 ring-offset-zinc-950 hover:cursor-pointer focus:ring-2 disabled:cursor-auto ${
-                    !!isSending && "btn-loading"
-                  } ${!!isSuccess && "btn-success"} ${
-                    !!isFailure && "btn-destructive"
+                    isSending
+                      ? "btn-loading"
+                      : isSuccess
+                      ? "btn-success"
+                      : isFailure
+                      ? "btn-destructive"
+                      : ""
                   }`}
                   disabled={isSending || isSuccess || isFailure}
                 >
