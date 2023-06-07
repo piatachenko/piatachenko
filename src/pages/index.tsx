@@ -44,6 +44,7 @@ export default function Home() {
       <Head>
         <title>IP: Work</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="desctiption" content="Welcome to the portfolio of Ivan Piatachenko. Discover a professional journey in web development and design, marked by a commitment to innovation, quality, and technical excellence." />
       </Head>
       <MainLayout page={"Work"}>
         <div
