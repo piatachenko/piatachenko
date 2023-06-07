@@ -80,7 +80,10 @@ export default function Contact() {
       <Head>
         <title>IP: Contact</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="desctiption" content="Get in touch with Ivan Piatachenko. Find contact information and connect for inquiries about web development and design projects." />
+        <meta
+          name="description"
+          content="Get in touch with Ivan Piatachenko. Find contact information and connect for inquiries about web development and design projects."
+        />
       </Head>
       <MainLayout page="Contact">
         <main>
