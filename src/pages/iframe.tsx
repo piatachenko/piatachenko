@@ -72,7 +72,7 @@ export default function Iframe() {
                     }}
                   />
                 </div>
-                <div className="flex h-full flex-col items-center justify-around py-7 opacity-0 transition-all duration-[.4s] group-hover:opacity-100 group-hover:delay-100">
+                <div className="absolute inset-0 -z-30 flex flex-col items-center justify-around py-7 opacity-0 transition-all duration-[.4s] group-hover:z-0 group-hover:opacity-100 group-hover:delay-100">
                   <div className="opacity-0">Logo</div>
                   <Link
                     href={element.demo}
