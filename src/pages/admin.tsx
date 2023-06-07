@@ -1,7 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-import { useState, type FormEvent } from "react";
-
-const prisma = new PrismaClient();
+import { FormEvent, useState } from "react";
 
 interface FormData {
   id: number;
@@ -15,29 +12,25 @@ interface Props {
   formDatas: FormData[];
 }
 
-export async function getServerSideProps() {
-  const formDatas = await prisma.formData.findMany();
-
-  const formDatasSerializable = formDatas.map((formData) => ({
-    ...formData,
-    createdAt: formData.createdAt.toISOString(),
-  }));
-
-  return {
-    props: {
-      formDatas: formDatasSerializable,
-    },
-  };
-}
-
-export default function Admin({ formDatas }: Props) {
+export default function Admin() {
   const [isAdmin, setIsAdmin] = useState(false);
-  function handleSubmit(e: FormEvent) {
+  const [formDatas, setFormDatas] = useState<FormData[]>([]);
+
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const target = e.target as typeof e.target & {
       password: { value: string };
     };
-    if (target.password.value === process.env.NEXT_PUBLIC_PASS) {
+
+    const response = await fetch("/api/admin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: target.password.value }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setFormDatas(data);
       setIsAdmin(true);
     }
   }
