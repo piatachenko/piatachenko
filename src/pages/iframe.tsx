@@ -8,26 +8,31 @@ export const projects = [
     image: "/assets/instrument.webp",
     demo: "https://instrument-com-clone.vercel.app/",
     code: "https://github.com/piatachenko/instrument-com-clone",
+    logo: "/assets/instrument-logo.svg",
   },
   {
     image: "/assets/lobe-ai.webp",
     demo: "https://lobeai-clone.vercel.app/",
     code: "https://github.com/piatachenko/lobe-ai-tour-page-next-sass-clone",
+    logo: "/assets/lobe-ai-logo.svg",
   },
   {
     image: "/assets/oh-studio.webp",
     demo: "https://ohstudio-clone.vercel.app/",
     code: "https://github.com/piatachenko/oh-studio-next-clone",
+    logo: "/assets/oh-studio-logo.svg",
   },
   {
     image: "/assets/backstage-talks.webp",
     demo: "https://backstage-talks-next.vercel.app/",
     code: "https://github.com/piatachenko/backstage-talks-next-clone",
+    logo: "/assets/backstage-talks-logo.png",
   },
   {
     image: "/assets/ableton.webp",
     demo: "https://ableton-nextjs.vercel.app/",
     code: "https://github.com/piatachenko/ableton-homepage-nextjs-clone",
+    logo: "/assets/ableton-logo.svg",
   },
 ];
 
@@ -73,7 +78,10 @@ export default function Iframe() {
                   />
                 </div>
                 <div className="absolute inset-0 -z-30 flex flex-col items-center justify-around py-7 opacity-0 transition-all duration-[.4s] group-hover:z-0 group-hover:opacity-100 group-hover:delay-100">
-                  <div className="opacity-0">Logo</div>
+                  <div
+                    className="h-8 w-9/12 bg-contain bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${element.logo})` }}
+                  />
                   <Link
                     href={element.demo}
                     target="_blank"
@@ -84,7 +92,7 @@ export default function Iframe() {
                   <Link
                     href={element.code}
                     target="_blank"
-                    className="underline"
+                    className="py-1 underline"
                   >
                     Source Code
                   </Link>
