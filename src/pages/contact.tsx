@@ -93,16 +93,15 @@ export default function Contact() {
         <meta property="og:title" content="Contact - Ivan Piatachenko" />
         <meta
           property="og:description"
-          content="Get in touch with Ivan Piatachenko, a professional front-end web developer. I'm available for freelance projects and would love to hear from you."
+          content="Get in touch with Ivan Piatachenko, a professional front-end developer. I'm available for freelance projects and would love to hear from you."
         />
-        <meta property="og:image" content="/assets/og-image.png" />
+        <meta property="og:image" content="/assets/og-image.webp" />
         <meta property="og:url" content="https://www.piatachenko.com/contact" />
         <meta property="og:type" content="website" />
         <meta
           property="og:site_name"
-          content="Ivan Piatachenko - Front-End Web Developer"
+          content="Ivan Piatachenko - Front-End Developer"
         />
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap" as="style" />
       </Head>
       <MainLayout page="Contact">
         <main>

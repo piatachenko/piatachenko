@@ -47,7 +47,7 @@ export default function Home() {
         <meta name="author" content="Ivan Piatachenko" />
         <meta
           name="description"
-          content="Ivan Piatachenko, a professional front-end web developer. Explore my portfolio to see my projects and skills."
+          content="Ivan Piatachenko, a professional front-end developer. Explore my portfolio to see my projects and skills."
         />
         <meta
           name="keywords"
@@ -57,16 +57,15 @@ export default function Home() {
         <meta property="og:title" content="Work - Ivan Piatachenko" />
         <meta
           property="og:description"
-          content="Explore the portfolio of Ivan Piatachenko, a professional front-end web developer. Discover my projects and the skills I've used to build them."
+          content="Explore the portfolio of Ivan Piatachenko, a professional front-end developer. Discover my projects and the skills I've used to build them."
         />
-        <meta property="og:image" content="/assets/og-image.png" />
+        <meta property="og:image" content="/assets/og-image.webp" />
         <meta property="og:url" content="https://www.piatachenko.com/" />
         <meta property="og:type" content="website" />
         <meta
           property="og:site_name"
-          content="Ivan Piatachenko - Front-End Web Developer"
+          content="Ivan Piatachenko - Front-End Developer"
         />
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap" as="style" />
       </Head>
       <MainLayout page={"Work"}>
         <div
