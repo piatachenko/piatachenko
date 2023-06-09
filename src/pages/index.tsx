@@ -44,10 +44,29 @@ export default function Home() {
       <Head>
         <title>IP: Work</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="author" content="Ivan Piatachenko" />
         <meta
           name="description"
-          content="Welcome to the portfolio of Ivan Piatachenko. Discover a professional journey in web development and design, marked by a commitment to innovation, quality, and technical excellence."
+          content="Ivan Piatachenko, a professional front-end web developer. Explore my portfolio to see my projects and skills."
         />
+        <meta
+          name="keywords"
+          content="Ivan, Piatachenko, Web Developer, Front-End Developer, JavaScript, HTML, CSS, React, Portfolio, Web Development Projects, Freelance Web Developer, Web Design, Responsive Web Design, Web Application Development, Coding, Programming"
+        />
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta property="og:title" content="Work - Ivan Piatachenko" />
+        <meta
+          property="og:description"
+          content="Explore the portfolio of Ivan Piatachenko, a professional front-end web developer. Discover my projects and the skills I've used to build them."
+        />
+        <meta property="og:image" content="/assets/og-image.png" />
+        <meta property="og:url" content="https://www.piatachenko.com/" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:site_name"
+          content="Ivan Piatachenko - Front-End Web Developer"
+        />
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap" as="style" />
       </Head>
       <MainLayout page={"Work"}>
         <div

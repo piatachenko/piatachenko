@@ -80,10 +80,29 @@ export default function Contact() {
       <Head>
         <title>IP: Contact</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="author" content="Ivan Piatachenko" />
         <meta
           name="description"
           content="Get in touch with Ivan Piatachenko. Find contact information and connect for inquiries about web development and design projects."
         />
+        <meta
+          name="keywords"
+          content="Ivan, Piatachenko, Web Developer, Front-End Developer, JavaScript, HTML, CSS, React, Portfolio, Web Development Projects, Freelance Web Developer, Web Design, Responsive Web Design, Web Application Development, Coding, Programming"
+        />
+        <meta name="theme-color" content="#0D0D0D" />
+        <meta property="og:title" content="Contact - Ivan Piatachenko" />
+        <meta
+          property="og:description"
+          content="Get in touch with Ivan Piatachenko, a professional front-end web developer. I'm available for freelance projects and would love to hear from you."
+        />
+        <meta property="og:image" content="/assets/og-image.png" />
+        <meta property="og:url" content="https://www.piatachenko.com/contact" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:site_name"
+          content="Ivan Piatachenko - Front-End Web Developer"
+        />
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap" as="style" />
       </Head>
       <MainLayout page="Contact">
         <main>
@@ -91,7 +110,7 @@ export default function Contact() {
             className="px-[6%] pb-10 sm:px-[3rem] md:px-[7%] xl:px-[10%] 2xl:px-[13%]"
             style={{
               paddingTop:
-                "calc((max(102.5vh, calc(var(--h) + 8rem)) - var(--h)) / 2)",
+                "calc((max(102.5svh, calc(var(--h) + 8rem)) - var(--h)) / 2)",
             }}
           >
             <form onSubmit={handleSubmit} className="w-full">
