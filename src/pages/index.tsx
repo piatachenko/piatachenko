@@ -53,7 +53,7 @@ export default function Home() {
         <div
           className="fixed right-1/2 z-10 flex translate-x-1/2 translate-y-1/2 items-center justify-center gap-1 mix-blend-difference"
           style={{
-            bottom: "max(calc((100vh - var(--h)) / 4), 2rem)",
+            bottom: "max(calc((100svh - var(--h)) / 4), 2rem)",
           }}
         >
           <div className="h-[1.5em] overflow-hidden">
