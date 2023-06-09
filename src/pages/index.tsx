@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useContext, useEffect, useState } from "react";
 import MainLayout from "~/layouts/MainLayout";
-import { projects } from "./iframe";
 import { ScrollPositionContext } from "./_app";
+import { projects } from "./iframe";
 
 export default function Home() {
   const [windowWidth, setWindowWidth] = useState(0);
@@ -29,13 +29,19 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const scrollWidth =
-      document.querySelector("iframe")?.contentWindow?.document.documentElement
-        .scrollWidth;
-    if (scrollWidth) {
-      const imageWidth = (scrollWidth - windowWidth) / (projects.length - 1);
-      const newCurrentItem = Math.floor(scrollPosition / imageWidth + 1.5);
-      setCurrentItem(newCurrentItem);
+    const iframe = document.querySelector("iframe");
+    if (
+      iframe &&
+      iframe.contentWindow &&
+      iframe.contentWindow.document.documentElement
+    ) {
+      const scrollWidth =
+        iframe.contentWindow.document.documentElement.scrollWidth;
+      if (scrollWidth) {
+        const imageWidth = (scrollWidth - windowWidth) / (projects.length - 1);
+        const newCurrentItem = Math.floor(scrollPosition / imageWidth + 1.5);
+        setCurrentItem(newCurrentItem);
+      }
     }
   }, [scrollPosition, windowWidth]);
 
