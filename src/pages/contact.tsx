@@ -104,9 +104,9 @@ export default function Contact() {
         />
       </Head>
       <MainLayout page="Contact">
-        <main>
+        <main className="overflow-hidden">
           <div
-            className="px-[6%] pb-10 sm:px-[3rem] md:px-[7%] xl:px-[10%] 2xl:px-[13%]"
+            className="absolute inset-0 overflow-auto px-[6%] pb-10 sm:px-[3rem] md:px-[7%] xl:px-[10%] 2xl:px-[13%]"
             style={{
               paddingTop:
                 "calc((max(102.5svh, calc(var(--h) + 8rem)) - var(--h)) / 2)",

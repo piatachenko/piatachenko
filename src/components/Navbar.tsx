@@ -12,7 +12,7 @@ export default function Navbar({ page }: NavbarProps) {
       <nav
         className="fixed right-1/2 z-10 -translate-y-1/2 translate-x-1/2 mix-blend-difference"
         style={{
-          top: "max(calc((100svh - var(--h)) / 4), 2rem)",
+          top: "max(calc((100% - var(--h)) / 4), 2rem)",
         }}
       >
         {pages.map((element, id) => (

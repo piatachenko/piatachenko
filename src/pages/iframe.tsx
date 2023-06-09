@@ -53,7 +53,7 @@ export default function Iframe() {
       <main className="iframe">
         <ScrollerMotion scale={1.25}>
           <motion.ul
-            className="flex min-h-[100svh] items-center"
+            className="flex min-h-screen items-center"
             style={{
               paddingInline: "calc(50vw - var(--w) / 2)",
             }}
@@ -66,7 +66,7 @@ export default function Iframe() {
                   transitionDuration: "0s",
                   transitionDelay: "0s",
                   width: "var(--w)",
-                  height: "min(var(--h), calc(100svh - 1.25rem))",
+                  height: "min(var(--h), calc(100vh - 1.25rem))",
                 }}
               >
                 <div className="absolute inset-0 -z-20 group-hover:bg-black">
