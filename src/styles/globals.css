@@ -18,11 +18,11 @@ body {
 }
 
 ::-webkit-scrollbar {
-  @apply w-1.5;
+  @apply w-1;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-zinc-800 hover:bg-zinc-700;
+  @apply bg-white/25 hover:bg-white/40;
 }
 
 .container-input:has(.is-empty)::before {
