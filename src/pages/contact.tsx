@@ -83,7 +83,7 @@ export default function Contact() {
         <meta name="author" content="Ivan Piatachenko" />
         <meta
           name="description"
-          content="Get in touch with Ivan Piatachenko. Find contact information and connect for inquiries about web development and design projects."
+          content="Get in touch with Ivan Piatachenko, a professional front-end developer. I'm available for freelance projects and would love to hear from you."
         />
         <meta
           name="keywords"
