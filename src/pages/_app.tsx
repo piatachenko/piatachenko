@@ -1,5 +1,6 @@
 import { type AppProps } from "next/app";
 import { type Router } from "next/router";
+import { Analytics } from '@vercel/analytics/react';
 import {
   createContext,
   useEffect,
@@ -61,6 +62,7 @@ export default function MyApp({
           }
         />
         <Component {...pageProps} />
+        <Analytics />
       </ScrollPositionContext.Provider>
     </>
   );
