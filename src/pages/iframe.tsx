@@ -84,11 +84,11 @@ export default function Iframe() {
                 }}
               >
                 <div className="absolute inset-0 -z-20 group-hover:bg-black">
-                  <div className="absolute inset-0 -z-10 transition-opacity duration-[.4s] group-hover:opacity-40 group-hover:delay-75">
+                  <div className="absolute inset-0 -z-10 transition-opacity duration-[.4s] group-hover:opacity-40">
                     <Image src={element.image} alt={""} placeholder="blur" />
                   </div>
                 </div>
-                <div className="absolute inset-0 -z-30 flex flex-col items-center justify-around py-7 opacity-0 transition-all duration-[.4s] group-hover:z-0 group-hover:opacity-100 group-hover:delay-100">
+                <div className="absolute inset-0 -z-30 flex flex-col items-center justify-around py-7 opacity-0 transition-all duration-[.2s] group-hover:z-0 group-hover:opacity-100">
                   <div
                     className="h-8 w-9/12 bg-contain bg-center bg-no-repeat"
                     style={{ backgroundImage: `url(${element.logo})` }}
