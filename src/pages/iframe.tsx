@@ -5,6 +5,12 @@ import { ScrollerMotion } from "scroller-motion";
 
 export const projects = [
   {
+    image: "/assets/sketch.webp",
+    demo: "https://sketch-apps-page-clone.vercel.app/",
+    code: "https://github.com/piatachenko/sketch-apps-page-clone",
+    logo: "/assets/sketch-logo.png",
+  },
+  {
     image: "/assets/instrument.webp",
     demo: "https://instrument-com-clone.vercel.app/",
     code: "https://github.com/piatachenko/instrument-com-clone",
