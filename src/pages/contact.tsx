@@ -168,7 +168,7 @@ export default function Contact() {
                   Prefer email?{" "}
                   <a
                     href="mailto:ivan@piatachenko.com"
-                    className="font-medium text-zinc-400 underline transition-all hover:text-zinc-100"
+                    className="text-zinc-400 underline transition-all hover:text-zinc-100"
                   >
                     ivan@piatachenko.com
                   </a>

@@ -1,6 +1,6 @@
+import { Analytics } from "@vercel/analytics/react";
 import { type AppProps } from "next/app";
 import { type Router } from "next/router";
-import { Analytics } from '@vercel/analytics/react';
 import {
   createContext,
   useEffect,
@@ -10,6 +10,13 @@ import {
   type SetStateAction,
 } from "react";
 import "~/styles/globals.css";
+
+import { Arimo } from "next/font/google";
+
+const arimo = Arimo({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 interface ScrollPositionContextData {
   scrollPosition: number;
@@ -61,7 +68,9 @@ export default function MyApp({
             router.pathname === "/" ? "absolute h-full w-full" : "hidden"
           }
         />
-        <Component {...pageProps} />
+        <div className={arimo.className}>
+          <Component {...pageProps} />
+        </div>
         <Analytics />
       </ScrollPositionContext.Provider>
     </>
