@@ -1,41 +1,49 @@
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 import { ScrollerMotion } from "scroller-motion";
 
+import abletonImg from "../../public/assets/ableton.webp";
+import backstageImg from "../../public/assets/backstage-talks.webp";
+import instrumentImg from "../../public/assets/instrument.webp";
+import lobeImg from "../../public/assets/lobe-ai.webp";
+import ohImg from "../../public/assets/oh-studio.webp";
+import sketchImg from "../../public/assets/sketch.webp";
+
 export const projects = [
   {
-    image: "/assets/sketch.webp",
+    image: sketchImg,
     demo: "https://sketch-apps-page-clone.vercel.app/",
     code: "https://github.com/piatachenko/sketch-apps-page-clone",
     logo: "/assets/sketch-logo.png",
   },
   {
-    image: "/assets/instrument.webp",
+    image: instrumentImg,
     demo: "https://instrument-com-clone.vercel.app/",
     code: "https://github.com/piatachenko/instrument-com-clone",
     logo: "/assets/instrument-logo.svg",
   },
   {
-    image: "/assets/lobe-ai.webp",
+    image: lobeImg,
     demo: "https://lobeai-clone.vercel.app/",
     code: "https://github.com/piatachenko/lobe-ai-tour-page-next-sass-clone",
     logo: "/assets/lobe-ai-logo.svg",
   },
   {
-    image: "/assets/oh-studio.webp",
+    image: ohImg,
     demo: "https://ohstudio-clone.vercel.app/",
     code: "https://github.com/piatachenko/oh-studio-next-clone",
     logo: "/assets/oh-studio-logo.svg",
   },
   {
-    image: "/assets/backstage-talks.webp",
+    image: backstageImg,
     demo: "https://backstage-talks-next.vercel.app/",
     code: "https://github.com/piatachenko/backstage-talks-next-clone",
     logo: "/assets/backstage-talks-logo.png",
   },
   {
-    image: "/assets/ableton.webp",
+    image: abletonImg,
     demo: "https://ableton-nextjs.vercel.app/",
     code: "https://github.com/piatachenko/ableton-homepage-nextjs-clone",
     logo: "/assets/ableton-logo.svg",
@@ -76,12 +84,9 @@ export default function Iframe() {
                 }}
               >
                 <div className="absolute inset-0 -z-20 group-hover:bg-black">
-                  <div
-                    className="absolute inset-0 -z-10 bg-cover transition-opacity duration-[.4s] group-hover:opacity-40 group-hover:delay-75"
-                    style={{
-                      backgroundImage: `url('${element.image}')`,
-                    }}
-                  />
+                  <div className="absolute inset-0 -z-10 transition-opacity duration-[.4s] group-hover:opacity-40 group-hover:delay-75">
+                    <Image src={element.image} alt={""} placeholder="blur" />
+                  </div>
                 </div>
                 <div className="absolute inset-0 -z-30 flex flex-col items-center justify-around py-7 opacity-0 transition-all duration-[.4s] group-hover:z-0 group-hover:opacity-100 group-hover:delay-100">
                   <div
