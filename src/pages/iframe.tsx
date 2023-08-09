@@ -85,7 +85,12 @@ export default function Iframe() {
               >
                 <div className="absolute inset-0 -z-20 group-hover:bg-black">
                   <div className="absolute inset-0 -z-10 transition-opacity duration-[.4s] group-hover:opacity-40">
-                    <Image src={element.image} alt={""} placeholder="blur" />
+                    <Image
+                      src={element.image}
+                      alt={""}
+                      placeholder="blur"
+                      className="h-full object-cover object-top"
+                    />
                   </div>
                 </div>
                 <div className="absolute inset-0 -z-30 flex flex-col items-center justify-around py-7 opacity-0 transition-all duration-[.2s] group-hover:z-0 group-hover:opacity-100">
